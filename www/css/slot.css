@@ -1,0 +1,7 @@
+.slot{
+  border: solid 1px black;
+  background: darkgreen;
+  display: inline-block;
+  width: 60px;
+  height: 100%;
+}
