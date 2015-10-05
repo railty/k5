@@ -1,7 +1,11 @@
 .slot{
-  border: solid 1px black;
-  background: darkgreen;
-  display: inline-block;
+  display:flex;
+  justify-content:center;
+  align-items: center;
+
   width: 60px;
   height: 100%;
+
+  border: solid 1px black;
+  background: darkgreen;
 }

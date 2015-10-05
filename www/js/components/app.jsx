@@ -4,7 +4,7 @@ import HTML5Backend from 'react-dnd/modules/backends/HTML5';
 
 import Floor from './floor'
 import Piano from './piano'
-import { observe } from './data';
+import { observe, bSuccess } from './data';
 
 class App extends React.Component {
 
@@ -23,14 +23,10 @@ class App extends React.Component {
     }
 
     render () {
-        var title = {
-          color: 'red',
-        };
-        var content = {
-          color: 'blue',
-        };
-
-        return (
+        if (bSuccess()) return (
+          <div>Success</div>
+        )
+        else return (
             <div>
                 <Floor data={this.state.data.floor} />
                 <Piano data={this.state.data.piano} />

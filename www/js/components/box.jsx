@@ -3,7 +3,7 @@ import '../../css/box.css'
 import React, { PropTypes } from 'react'
 import { DragSource } from 'react-dnd';
 
-import { dropBox } from './data';
+import { dropFloor, dropSlot } from './data';
 
 const boxSource = {
   beginDrag(props) {
@@ -15,12 +15,14 @@ const boxSource = {
     const dropResult = monitor.getDropResult();
 
     if (dropResult) {
-      dropBox(box.data, dropResult.name, dropResult.dlt);
+      if (dropResult.name == 'floor') dropFloor(box.data, dropResult.dest);
+      if (dropResult.name == 'slot') dropSlot(box.data, dropResult.slot);
     }
   }
 };
 
 function collect(connect, monitor) {
+
   return {
     connectDragSource: connect.dragSource(),
     isDragging: monitor.isDragging()
@@ -29,7 +31,7 @@ function collect(connect, monitor) {
 
 class Box extends React.Component {
     render () {
-      const { isDragging, connectDragSource, data: {l, t, note} } = this.props;
+      const { isDragging, connectDragSource, data: {l, t, note}, slot } = this.props;
       const opacity = isDragging ? 0.4 : 1;
 
       const style = {
@@ -38,6 +40,7 @@ class Box extends React.Component {
         top: t,
       };
 
+      if (!slot) style.position = 'absolute';
       return (
         connectDragSource(
           <div className="box" style={{ ...style, opacity }}>

@@ -12,11 +12,12 @@ const style = {
 
 const floorTarget = {
   drop(props, monitor, component) {
-    return {name: 'floor', dlt: monitor.getDifferenceFromInitialOffset()};
+    return {name: 'floor', dest: monitor.getSourceClientOffset()};
   }
 };
 
 function collect(connect, monitor) {
+
   return {
     connectDropTarget: connect.dropTarget(),
     isOver: monitor.isOver(),

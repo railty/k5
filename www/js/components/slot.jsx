@@ -3,20 +3,18 @@ import '../../css/slot.css'
 import React, { PropTypes } from 'react'
 import { DropTarget } from 'react-dnd';
 
+import Box from './box'
+
 const style = {
 };
 
 const slotTarget = {
   drop(props, monitor, component) {
-    return {name: 'slot'};
-  },
-  hover(props, monitor, component) {
-    console.log("1111");
+    return {name: 'slot', slot: props.data};
   }
 };
 
 function collect(connect, monitor) {
-  console.log(monitor.isOver({ shallow: true }));
   return {
     connectDropTarget: connect.dropTarget(),
     isOver: monitor.isOver(),
@@ -34,20 +32,28 @@ class Slot extends React.Component {
     };
 
     render () {
-      const { canDrop, isOver, data: {color, k, note, box} } = this.props;
+      const { connectDropTarget, canDrop, isOver, data: {color, k, note, box} } = this.props;
       const isActive = canDrop && isOver;
-
-//console.log(canDrop +","+ isOver);
 
       let backgroundColor = 'darkgreen';
       if (isActive) {
         backgroundColor = 'darkgrey';
       }
-      return (
-          <div className="slot" style={{ ...style, backgroundColor }}>
-            {note}
-          </div>
-      );
+
+      if (box){
+        return connectDropTarget(
+            <div className="slot" style={{ ...style, backgroundColor }}>
+              <Box data={box} slot />
+              {note}
+            </div>
+        );
+      }else{
+        return connectDropTarget(
+            <div className="slot" style={{ ...style, backgroundColor }}>
+              {note}
+            </div>
+        );
+      }
     }
 }
 
