@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react'
 import { DragDropContext } from 'react-dnd';
-import HTML5Backend from 'react-dnd/modules/backends/HTML5';
+//import HTML5Backend from 'react-dnd/modules/backends/HTML5';
+import { default as TouchBackend } from 'react-dnd-touch-backend';
 
 import Floor from './floor'
 import Piano from './piano'
@@ -35,4 +36,5 @@ class App extends React.Component {
     }
 }
 
-export default DragDropContext(HTML5Backend)(App);
+//export default DragDropContext(HTML5Backend)(App);
+export default DragDropContext(TouchBackend)(App);
