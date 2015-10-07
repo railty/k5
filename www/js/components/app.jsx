@@ -13,7 +13,6 @@ import Piano from './piano'
 import { observe, bSuccess } from './data';
 
 class App extends React.Component {
-
     constructor(props) {
        super(props);
        this.unobserve = observe(this.handleChange.bind(this));
