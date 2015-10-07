@@ -1,7 +1,12 @@
+import '../../css/app.css'
+
 import React, { PropTypes } from 'react'
 import { DragDropContext } from 'react-dnd';
-//import HTML5Backend from 'react-dnd/modules/backends/HTML5';
+
+import HTML5Backend from 'react-dnd/modules/backends/HTML5';
 import { default as TouchBackend } from 'react-dnd-touch-backend';
+
+var backEnd = (cordova.platformId == "browser") ? HTML5Backend : TouchBackend;
 
 import Floor from './floor'
 import Piano from './piano'
@@ -24,26 +29,17 @@ class App extends React.Component {
     }
 
     render () {
-        const style = {
-          position:'absolute',
-          top:300,
-          left:0,
-          width:'100%',
-          height:150,
-        };
-
-        if (bSuccess()) return (
-          <div>Success</div>
-        )
-        else return (
-            <div>
-                <Floor data={this.state.data.floor} />
-                <Piano data={this.state.data.piano} />
-                <div style={{ ...style }}>1111</div>
+        var msg = bSuccess() ? 'Success' : 'Running';
+        return (
+            <div className="app">
+              <div className="top">{msg}</div>
+              <Floor data={this.state.data.floor} />
+              <Piano data={this.state.data.piano} />
             </div>
         )
     }
 }
 
 //export default DragDropContext(HTML5Backend)(App);
-export default DragDropContext(TouchBackend)(App);
+//export default DragDropContext(TouchBackend)(App);
+export default DragDropContext(backEnd)(App);

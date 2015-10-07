@@ -1,0 +1,11 @@
+.app{
+  display:flex;
+  flex-direction: column;
+  height: 300px;
+  width: 100%;
+}
+.top{
+  height: 20px;
+  width: 100%;
+  background: lightgrey;
+}
