@@ -24,6 +24,14 @@ class App extends React.Component {
     }
 
     render () {
+        const style = {
+          position:'absolute',
+          top:300,
+          left:0,
+          width:'100%',
+          height:150,
+        };
+
         if (bSuccess()) return (
           <div>Success</div>
         )
@@ -31,6 +39,7 @@ class App extends React.Component {
             <div>
                 <Floor data={this.state.data.floor} />
                 <Piano data={this.state.data.piano} />
+                <div style={{ ...style }}>1111</div>
             </div>
         )
     }
