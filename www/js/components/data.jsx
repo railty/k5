@@ -83,8 +83,6 @@ export function dropSlot(box, slot) {
 
 export function bSuccess() {
   return data.piano.every(item => {
-    console.log(item);
-    console.log(item.box);
     return item.box && (item.box.k == item.k);
   });
 }

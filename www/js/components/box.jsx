@@ -31,7 +31,6 @@ function collect(connect, monitor) {
 
 class Box extends React.Component {
     onClick(){
-      debugger;
       var concertHallBuffer, soundSource;
       var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 
@@ -42,7 +41,7 @@ class Box extends React.Component {
       var url2 = 'https://drive.google.com/file/d/0B1dzL4WNzGjhTkJRTWxRd2NDd3M/view?usp=sharing';
       var url3 = 'https://drive.google.com/file/d/0B1dzL4WNzGjhVFZMNEhMQy00blU/view?usp=sharing';
 
-      ajaxRequest.open('GET', url0, true);      
+      ajaxRequest.open('GET', url0, true);
       ajaxRequest.responseType = 'arraybuffer';
 
       ajaxRequest.onload = function() {
