@@ -10,7 +10,8 @@ let data = {
     {color:'white', note: '1Cs', k: 21, box:null},
     {color:'white', note: '2C',  k: 22, box:null},
     {color:'white', note: '2Cs', k: 23, box:null},
-  ]
+  ],
+  msg: 'ready',
 };
 
 let observer = null;
@@ -85,4 +86,8 @@ export function bSuccess() {
   return data.piano.every(item => {
     return item.box && (item.box.k == item.k);
   });
+}
+
+export function msg(txt) {
+  data.msg = txt;
 }

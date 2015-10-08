@@ -30,10 +30,14 @@ class App extends React.Component {
       console.log('aaa');
     }
     render () {
-        var msg = bSuccess() ? 'Success' : 'A Run ' + cordova.file.applicationDirectory + ' ss';
+        var msg = bSuccess() ? 'Success' : 'Running';
+        const style = {
+          height: window.innerHeight,
+        };
+
         return (
-            <div className="app">
-              <div className="top" onClick={this.onClick}>{msg}</div>
+            <div className="app" style={{ ...style }}>
+              <div className="top" onClick={this.onClick}>{msg + ':' + this.state.data.msg}</div>
               <Floor data={this.state.data.floor} />
               <Piano data={this.state.data.piano} />
             </div>
