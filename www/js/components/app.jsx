@@ -27,25 +27,10 @@ class App extends React.Component {
        }
     }
     onClick(){
-      debugger;
-      window.resolveLocalFileSystemURL(cordova.file.applicationDirectory + "www/media/220-A.mp3", function(fileEntry){
-        fileEntry.file(function(file) {
-          var reader = new FileReader();
-
-          reader.onloadend = function(e) {
-          console.log("Text is: "+this.result);
-          document.querySelector("#textArea").innerHTML = this.result;
-          }
-
-          reader.readAsText(file);
-          });
-      }, function(){
-        console.log('failed');
-      });
-
+      console.log('aaa');
     }
     render () {
-        var msg = bSuccess() ? 'Success' : 'Running ' + cordova.file.applicationDirectory;
+        var msg = bSuccess() ? 'Success' : 'A Run ' + cordova.file.applicationDirectory + ' ss';
         return (
             <div className="app">
               <div className="top" onClick={this.onClick}>{msg}</div>

@@ -40,8 +40,8 @@ class Box extends React.Component {
       var url1 = 'https://drive.google.com/file/d/0B1dzL4WNzGjhSnREUlZsZWVQSWc/view?usp=sharing';
       var url2 = 'https://drive.google.com/file/d/0B1dzL4WNzGjhTkJRTWxRd2NDd3M/view?usp=sharing';
       var url3 = 'https://drive.google.com/file/d/0B1dzL4WNzGjhVFZMNEhMQy00blU/view?usp=sharing';
-
-      ajaxRequest.open('GET', url0, true);
+      var url4 = cordova.file.applicationDirectory + "www/media/220-A.mp3";
+      ajaxRequest.open('GET', url4, true);
       ajaxRequest.responseType = 'arraybuffer';
 
       ajaxRequest.onload = function() {
