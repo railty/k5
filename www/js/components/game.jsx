@@ -10,6 +10,7 @@ var backEnd = (cordova.platformId == "browser") ? HTML5Backend : TouchBackend;
 
 import Floor from './floor'
 import Piano from './piano'
+import CustomDragLayer from './customDragLayer';
 import { observe, bSuccess } from './data';
 
 class Game extends React.Component {
@@ -43,6 +44,7 @@ class Game extends React.Component {
               <div className="top" onClick={this.onClick}>{msg + ':' + this.state.data.msg}</div>
               <Floor data={this.state.data.floor} />
               <Piano data={this.state.data.piano} />
+              <CustomDragLayer />
             </div>
         )
     }
