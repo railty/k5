@@ -1,5 +1,9 @@
+import '../css/index.css'
 import React from 'react'
-import App from './components/app'
+import { Router, Route, Link } from 'react-router'
+
+import Game from './components/game'
+import Graph from './components/graph'
 
 Promise.onPossiblyUnhandledRejection(err => {
     throw err
@@ -15,9 +19,33 @@ window.onerror = (msg, url, line, column, e) => {
     return true;
 }
 
+class App extends React.Component {
+    render () {
+        return (
+            <div>
+              <ul>
+                <li><Link to="/Game">Game</Link></li>
+                <li><Link to="/graph">Graph</Link></li>
+              </ul>
+
+              {this.props.children}
+            </div>
+        )
+    }
+}
+
 try {
     document.addEventListener('deviceready', () => {
-        React.render(<App />, document.body);
+
+        React.render((
+          <Router>
+            <Route path="/" component={App}>
+              <Route path="game" component={Game} />
+              <Route path="graph" component={Graph} />
+            </Route>
+          </Router>
+        ), document.body)
+
     }, false)
 } catch (e) {
     handleError(e);

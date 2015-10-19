@@ -1,9 +1,9 @@
-import '../../css/app.css'
+import '../../css/game.css'
 
 import React, { PropTypes } from 'react'
 import { DragDropContext } from 'react-dnd';
 
-import HTML5Backend from 'react-dnd/modules/backends/HTML5';
+import HTML5Backend from 'react-dnd-html5-backend';
 import { default as TouchBackend } from 'react-dnd-touch-backend';
 
 var backEnd = (cordova.platformId == "browser") ? HTML5Backend : TouchBackend;
@@ -12,7 +12,7 @@ import Floor from './floor'
 import Piano from './piano'
 import { observe, bSuccess } from './data';
 
-class App extends React.Component {
+class Game extends React.Component {
     constructor(props) {
        super(props);
        this.unobserve = observe(this.handleChange.bind(this));
@@ -26,6 +26,9 @@ class App extends React.Component {
          this.state = nextState;
        }
     }
+    componentWillUnmount() {
+      this.unobserve();
+    }
     onClick(){
       console.log('aaa');
     }
@@ -36,7 +39,7 @@ class App extends React.Component {
         };
 
         return (
-            <div className="app" style={{ ...style }}>
+            <div className="game" style={{ ...style }}>
               <div className="top" onClick={this.onClick}>{msg + ':' + this.state.data.msg}</div>
               <Floor data={this.state.data.floor} />
               <Piano data={this.state.data.piano} />
@@ -47,4 +50,4 @@ class App extends React.Component {
 
 //export default DragDropContext(HTML5Backend)(App);
 //export default DragDropContext(TouchBackend)(App);
-export default DragDropContext(backEnd)(App);
+export default DragDropContext(backEnd)(Game);
