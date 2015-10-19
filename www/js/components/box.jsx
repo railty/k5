@@ -37,6 +37,9 @@ class Box extends React.Component {
       });
     }
     onClick(){
+      var data = this.props.data;
+      var mp3 = data.color == "white" ? data.note+data.octvar+".mp3" : data.note+'b'+data.octvar+".mp3";
+
       var concertHallBuffer, soundSource;
       var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 
@@ -44,10 +47,10 @@ class Box extends React.Component {
 
       var url;
       if (cordova.platformId == "browser"){
-        url = cordova.file.applicationDirectory + "browser/" + "www/media/" + "220-A.mp3";
+        url = cordova.file.applicationDirectory + "browser/" + "www/media/" + mp3;
       }
       else{
-        url = cordova.file.applicationDirectory + "www/media/" + "220-A.mp3";
+        url = cordova.file.applicationDirectory + "www/media/" + mp3;
       }
 
       ajaxRequest.open('GET', url, true);
@@ -70,9 +73,10 @@ class Box extends React.Component {
     }
 
     render () {
-      const { isDragging, connectDragSource, data: {l, t, note}, slot, preview } = this.props;
+      const { isDragging, connectDragSource, data: {l, t, note, octvar, color}, slot, preview } = this.props;
       const style = {
         cursor: 'move',
+        background: color=="white" ? "lightgrey" : "darkgrey",
         left: l,
         top: t,
       };
@@ -89,8 +93,8 @@ class Box extends React.Component {
         if (!slot) style.position = 'absolute';
         return (
           connectDragSource(
-            <div className="box" style={{ ...style, opacity }} onClick={this.onClick}>
-              {note+':'+isDragging}
+            <div className="box" style={{ ...style, opacity }} onClick={this.onClick.bind(this)}>
+              {note+octvar}
             </div>
           )
         );

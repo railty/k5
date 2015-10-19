@@ -35,6 +35,27 @@ gulp.task('build', function(cb) {
     return runSequence('webpack', 'uglify', 'hash')
 })
 
+gulp.task('listMp3', function(cb) {
+  var fs = require("fs");
+  var files = fs.readdirSync("www/media/");
+  var k = 1;
+  var floor = [];
+  var piano = [];
+  files.forEach(function(mp3){
+    var note = mp3.replace(/\.mp3$/, '');
+    var color = note.length==3 ? 'black' : 'white';
+    var octvar = note.slice(-1);
+    note = note.slice(0, 1);
+    var l = Math.round(Math.random()*400);
+    var t = Math.round(Math.random()*400);
+    floor.push({color: color, note: note, octvar: octvar, k: k, l: l , t: t});
+    piano.push({color: color, note: note, octvar: octvar, k: k, box: null});
+    k++;
+  });
+  console.log("data.floor=" + JSON.stringify(floor, null, " ") + ";");
+  console.log("data.piano=" + JSON.stringify(piano, null, " ") + ";");
+})
+
 gulp.task('prepare', function(cb) {
     return cordova.prepare(cb)
 })

@@ -8,35 +8,18 @@ const styles = {
 };
 
 export default class BoxDragPreview extends Component {
-  static propTypes = {
-    title: PropTypes.string.isRequired
-  };
-
   constructor(props) {
     super(props);
-    this.tick = this.tick.bind(this);
-    this.state = {
-      tickTock: false
-    };
   }
 
   componentDidMount() {
-    this.interval = setInterval(this.tick, 500);
   }
 
   componentWillUnmount() {
-    clearInterval(this.interval);
-  }
-
-  tick() {
-    this.setState({
-      tickTock: !this.state.tickTock
-    });
   }
 
   render() {
     const { data } = this.props;
-    const { tickTock } = this.state;
     return (
       <div style={styles}>
         <Box preview data={data} />

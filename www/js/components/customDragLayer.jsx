@@ -41,7 +41,6 @@ class CustomDragLayer extends Component {
       y: PropTypes.number.isRequired
     }),
     isDragging: PropTypes.bool.isRequired,
-    snapToGrid: PropTypes.bool.isRequired
   };
 
   renderItem(type, item) {
