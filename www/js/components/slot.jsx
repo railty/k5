@@ -32,25 +32,31 @@ class Slot extends React.Component {
     };
 
     render () {
-      const { connectDropTarget, canDrop, isOver, data: {color, k, note, box} } = this.props;
+      const { connectDropTarget, canDrop, isOver, data: {k, note, box, octave} } = this.props;
       const isActive = canDrop && isOver;
 
-      let backgroundColor = 'darkgreen';
+      var color = note.length==1 ? 'white' : 'black';
+
+      let backgroundColor;
       if (isActive) {
-        backgroundColor = 'darkgrey';
+        backgroundColor = 'lightgreen';
       }
+      else{
+        backgroundColor = color=='white' ? 'lightgrey' : 'black';
+      }
+
+      let c = note=='C' ? 'C' : "";
 
       if (box){
         return connectDropTarget(
-            <div className="slot" style={{ ...style, backgroundColor }}>
+            <div className={color} style={{ ...style, backgroundColor }}>
               <Box data={box} slot />
-              {note}
             </div>
         );
       }else{
         return connectDropTarget(
-            <div className="slot" style={{ ...style, backgroundColor }}>
-              {note}
+            <div className={color} style={{ ...style, backgroundColor }}>
+              {c}
             </div>
         );
       }

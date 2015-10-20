@@ -4,4 +4,7 @@
 
   border: solid 1px black;
   background: lightgreen;
+  display:flex;
+  justify-content:center;
+  align-items: flex-end;
 }

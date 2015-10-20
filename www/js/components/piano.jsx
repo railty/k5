@@ -8,15 +8,23 @@ const style = {
 
 class Piano extends React.Component {
     render () {
-
-      const slots = this.props.data.map(function(item, i){
-        return (
-          <Slot key={i} data={item} />
-        );
-      });
-
+      var blacks=[], whites=[];
+      for(var item of this.props.data){
+        if (item.note.length==1){
+          whites.push((
+            <Slot key={item.k} data={item} />
+          ));
+        }
+        else{
+          blacks.push((
+            <Slot key={item.k} data={item} />
+          ));
+        }
+      }
       return (
-          <div className="piano" style={{ ...style }}>{slots}
+          <div className="piano" style={{ ...style }}>
+            <div className="blacks">{blacks}</div>
+            <div className="whites">{whites}</div>
           </div>
       )
     }

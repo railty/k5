@@ -36,7 +36,7 @@ class Game extends React.Component {
     render () {
         var msg = bSuccess() ? 'Success' : 'Running';
         const style = {
-          height: window.innerHeight,
+          height: window.innerHeight-100,
         };
 
         return (

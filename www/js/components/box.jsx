@@ -22,7 +22,6 @@ const boxSource = {
 };
 
 function collect(connect, monitor) {
-
   return {
     connectDragSource: connect.dragSource(),
     connectDragPreview: connect.dragPreview(),
@@ -38,7 +37,7 @@ class Box extends React.Component {
     }
     onClick(){
       var data = this.props.data;
-      var mp3 = data.color == "white" ? data.note+data.octave+".mp3" : data.note+'b'+data.octave+".mp3";
+      var mp3 = data.note + data.octave + ".mp3";
 
       var concertHallBuffer, soundSource;
       var audioCtx = getAudioCtx();
@@ -76,8 +75,8 @@ class Box extends React.Component {
       const { isDragging, connectDragSource, data: {l, t, note, octave, color}, slot, preview } = this.props;
       const style = {
         cursor: 'move',
-        background: color=="white" ? "azure" : "black",
-        color: color=="white" ? "black" : "azure",
+        background: "darkgreen",
+        color: "black",
         left: l,
         top: t,
       };
@@ -87,7 +86,7 @@ class Box extends React.Component {
       if (preview){
         return (
           <div className="box" style={{ ...style, opacity }}>
-            {note+octave}
+            *
           </div>
         );
       }else{
@@ -95,7 +94,7 @@ class Box extends React.Component {
         return (
           connectDragSource(
             <div className="box" style={{ ...style, opacity }} onClick={this.onClick.bind(this)}>
-              {note+octave}
+              *
             </div>
           )
         );
