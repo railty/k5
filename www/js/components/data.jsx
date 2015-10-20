@@ -42,6 +42,27 @@ class Keyboard{
     return i;
   }
 }
+/*
+32
+C3-G5
+F2-C5
+36
+C3-B5
+F2-E5
+37
+C2-C5
+F2-F5
+49
+C2-C6
+54
+C2-F6
+61
+C1-C6
+76
+E1-G7
+88
+A0-C8
+*/
 //49 keys
 var keys = new Keyboard('C2', 'C6');
 var id = 0;
