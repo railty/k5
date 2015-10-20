@@ -1,6 +1,6 @@
 import '../css/index.css'
 import React from 'react'
-import { Router, Route, Link } from 'react-router'
+import { Router, Route, Link, IndexRoute } from 'react-router'
 
 import Game from './components/game'
 import Graph from './components/graph'
@@ -21,16 +21,25 @@ window.onerror = (msg, url, line, column, e) => {
 
 class App extends React.Component {
     render () {
+      if(cordova.platformId == "browser"){
         return (
             <div>
               <ul>
                 <li><Link to="/Game">Game</Link></li>
                 <li><Link to="/graph">Graph</Link></li>
               </ul>
-
               {this.props.children}
             </div>
         )
+      }
+      else{
+        return (
+            <div>
+              {this.props.children}
+            </div>
+        )
+      }
+
     }
 }
 
@@ -40,6 +49,7 @@ try {
         React.render((
           <Router>
             <Route path="/" component={App}>
+              <IndexRoute component={Game} />
               <Route path="game" component={Game} />
               <Route path="graph" component={Graph} />
             </Route>

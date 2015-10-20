@@ -85,7 +85,7 @@ class Graph extends React.Component {
 
       if (this.channel0) draw();
       else{
-        this.dl("220-A.mp3", function(buffer){
+        this.dl("C3.mp3", function(buffer){
           this.channel0 = clip(buffer.getChannelData(0), 0.01);
           this.channel1 = clip(buffer.getChannelData(1), 0.01);
           console.log(this.channel0);

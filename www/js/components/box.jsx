@@ -3,7 +3,7 @@ import '../../css/box.css'
 import React, { PropTypes } from 'react'
 import { DragSource } from 'react-dnd';
 import { getEmptyImage } from 'react-dnd-html5-backend';
-import { dropFloor, dropSlot, msg } from './data';
+import { dropFloor, dropSlot, msg, getAudioCtx } from './data';
 
 const boxSource = {
   beginDrag(props) {
@@ -38,10 +38,10 @@ class Box extends React.Component {
     }
     onClick(){
       var data = this.props.data;
-      var mp3 = data.color == "white" ? data.note+data.octvar+".mp3" : data.note+'b'+data.octvar+".mp3";
+      var mp3 = data.color == "white" ? data.note+data.octave+".mp3" : data.note+'b'+data.octave+".mp3";
 
       var concertHallBuffer, soundSource;
-      var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      var audioCtx = getAudioCtx();
 
       var ajaxRequest = new XMLHttpRequest();
 
@@ -73,10 +73,11 @@ class Box extends React.Component {
     }
 
     render () {
-      const { isDragging, connectDragSource, data: {l, t, note, octvar, color}, slot, preview } = this.props;
+      const { isDragging, connectDragSource, data: {l, t, note, octave, color}, slot, preview } = this.props;
       const style = {
         cursor: 'move',
-        background: color=="white" ? "lightgrey" : "darkgrey",
+        background: color=="white" ? "azure" : "black",
+        color: color=="white" ? "black" : "azure",
         left: l,
         top: t,
       };
@@ -86,7 +87,7 @@ class Box extends React.Component {
       if (preview){
         return (
           <div className="box" style={{ ...style, opacity }}>
-            {note+':'+isDragging}
+            {note+octave}
           </div>
         );
       }else{
@@ -94,7 +95,7 @@ class Box extends React.Component {
         return (
           connectDragSource(
             <div className="box" style={{ ...style, opacity }} onClick={this.onClick.bind(this)}>
-              {note+octvar}
+              {note+octave}
             </div>
           )
         );

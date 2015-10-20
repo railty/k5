@@ -1,12 +1,42 @@
 let data = {
   msg: 'ready',
 };
+/*
+var piano49 = ['c2', 'c6'];
 
+class Keyboard{
+  constructor(firstNote, lastNote) {
+     this.firstNote = firstNote;
+     this.lastNote = lastNote;
+  }
+  [Symbol.iterator]() {
+      let step = this.firstNote;
+      let iterator = {
+        var lastNote = this.lastNote;
+          next() {
+            console.log("sss:"+lastNote);
+              if (step <= lastNote) {
+                  step++;
+                  return { value: step, done: false };
+              }
+              else{
+                return { value: step, done: true };
+              }
+          }
+      };
+      return iterator;
+  }
+}
+var K = new Keyboard(1, 10);
+for (let x of K) {
+    console.log(x);
+}
+*/
 data.floor=[
  {
   "color": "white",
   "note": "A",
-  "octvar": "0",
+  "octave": "0",
   "k": 1,
   "l": 144,
   "t": 82
@@ -14,7 +44,7 @@ data.floor=[
  {
   "color": "white",
   "note": "A",
-  "octvar": "1",
+  "octave": "1",
   "k": 2,
   "l": 78,
   "t": 151
@@ -22,7 +52,7 @@ data.floor=[
  {
   "color": "white",
   "note": "A",
-  "octvar": "2",
+  "octave": "2",
   "k": 3,
   "l": 312,
   "t": 132
@@ -30,7 +60,7 @@ data.floor=[
  {
   "color": "white",
   "note": "A",
-  "octvar": "3",
+  "octave": "3",
   "k": 4,
   "l": 106,
   "t": 397
@@ -38,7 +68,7 @@ data.floor=[
  {
   "color": "white",
   "note": "A",
-  "octvar": "4",
+  "octave": "4",
   "k": 5,
   "l": 373,
   "t": 23
@@ -46,7 +76,7 @@ data.floor=[
  {
   "color": "white",
   "note": "A",
-  "octvar": "5",
+  "octave": "5",
   "k": 6,
   "l": 144,
   "t": 27
@@ -54,7 +84,7 @@ data.floor=[
  {
   "color": "white",
   "note": "A",
-  "octvar": "6",
+  "octave": "6",
   "k": 7,
   "l": 46,
   "t": 90
@@ -62,7 +92,7 @@ data.floor=[
  {
   "color": "white",
   "note": "A",
-  "octvar": "7",
+  "octave": "7",
   "k": 8,
   "l": 339,
   "t": 68
@@ -70,7 +100,7 @@ data.floor=[
  {
   "color": "black",
   "note": "A",
-  "octvar": "1",
+  "octave": "1",
   "k": 9,
   "l": 114,
   "t": 279
@@ -78,7 +108,7 @@ data.floor=[
  {
   "color": "black",
   "note": "A",
-  "octvar": "2",
+  "octave": "2",
   "k": 10,
   "l": 190,
   "t": 266
@@ -86,7 +116,7 @@ data.floor=[
  {
   "color": "black",
   "note": "A",
-  "octvar": "3",
+  "octave": "3",
   "k": 11,
   "l": 161,
   "t": 155
@@ -94,7 +124,7 @@ data.floor=[
  {
   "color": "black",
   "note": "A",
-  "octvar": "4",
+  "octave": "4",
   "k": 12,
   "l": 26,
   "t": 55
@@ -102,7 +132,7 @@ data.floor=[
  {
   "color": "black",
   "note": "A",
-  "octvar": "5",
+  "octave": "5",
   "k": 13,
   "l": 78,
   "t": 186
@@ -110,7 +140,7 @@ data.floor=[
  {
   "color": "black",
   "note": "A",
-  "octvar": "6",
+  "octave": "6",
   "k": 14,
   "l": 257,
   "t": 280
@@ -118,7 +148,7 @@ data.floor=[
  {
   "color": "black",
   "note": "A",
-  "octvar": "7",
+  "octave": "7",
   "k": 15,
   "l": 220,
   "t": 352
@@ -126,7 +156,7 @@ data.floor=[
  {
   "color": "white",
   "note": "B",
-  "octvar": "0",
+  "octave": "0",
   "k": 16,
   "l": 85,
   "t": 293
@@ -134,7 +164,7 @@ data.floor=[
  {
   "color": "white",
   "note": "B",
-  "octvar": "1",
+  "octave": "1",
   "k": 17,
   "l": 364,
   "t": 58
@@ -142,7 +172,7 @@ data.floor=[
  {
   "color": "white",
   "note": "B",
-  "octvar": "2",
+  "octave": "2",
   "k": 18,
   "l": 67,
   "t": 260
@@ -150,7 +180,7 @@ data.floor=[
  {
   "color": "white",
   "note": "B",
-  "octvar": "3",
+  "octave": "3",
   "k": 19,
   "l": 120,
   "t": 20
@@ -158,7 +188,7 @@ data.floor=[
  {
   "color": "white",
   "note": "B",
-  "octvar": "4",
+  "octave": "4",
   "k": 20,
   "l": 254,
   "t": 170
@@ -166,7 +196,7 @@ data.floor=[
  {
   "color": "white",
   "note": "B",
-  "octvar": "5",
+  "octave": "5",
   "k": 21,
   "l": 323,
   "t": 64
@@ -174,7 +204,7 @@ data.floor=[
  {
   "color": "white",
   "note": "B",
-  "octvar": "6",
+  "octave": "6",
   "k": 22,
   "l": 212,
   "t": 251
@@ -182,7 +212,7 @@ data.floor=[
  {
   "color": "white",
   "note": "B",
-  "octvar": "7",
+  "octave": "7",
   "k": 23,
   "l": 281,
   "t": 355
@@ -190,7 +220,7 @@ data.floor=[
  {
   "color": "black",
   "note": "B",
-  "octvar": "0",
+  "octave": "0",
   "k": 24,
   "l": 341,
   "t": 267
@@ -198,7 +228,7 @@ data.floor=[
  {
   "color": "black",
   "note": "B",
-  "octvar": "1",
+  "octave": "1",
   "k": 25,
   "l": 151,
   "t": 99
@@ -206,7 +236,7 @@ data.floor=[
  {
   "color": "black",
   "note": "B",
-  "octvar": "2",
+  "octave": "2",
   "k": 26,
   "l": 220,
   "t": 309
@@ -214,7 +244,7 @@ data.floor=[
  {
   "color": "black",
   "note": "B",
-  "octvar": "3",
+  "octave": "3",
   "k": 27,
   "l": 301,
   "t": 215
@@ -222,7 +252,7 @@ data.floor=[
  {
   "color": "black",
   "note": "B",
-  "octvar": "4",
+  "octave": "4",
   "k": 28,
   "l": 70,
   "t": 43
@@ -230,7 +260,7 @@ data.floor=[
  {
   "color": "black",
   "note": "B",
-  "octvar": "5",
+  "octave": "5",
   "k": 29,
   "l": 207,
   "t": 171
@@ -238,7 +268,7 @@ data.floor=[
  {
   "color": "black",
   "note": "B",
-  "octvar": "6",
+  "octave": "6",
   "k": 30,
   "l": 155,
   "t": 199
@@ -246,7 +276,7 @@ data.floor=[
  {
   "color": "black",
   "note": "B",
-  "octvar": "7",
+  "octave": "7",
   "k": 31,
   "l": 14,
   "t": 373
@@ -254,7 +284,7 @@ data.floor=[
  {
   "color": "white",
   "note": "C",
-  "octvar": "1",
+  "octave": "1",
   "k": 32,
   "l": 32,
   "t": 395
@@ -262,7 +292,7 @@ data.floor=[
  {
   "color": "white",
   "note": "C",
-  "octvar": "2",
+  "octave": "2",
   "k": 33,
   "l": 343,
   "t": 302
@@ -270,7 +300,7 @@ data.floor=[
  {
   "color": "white",
   "note": "C",
-  "octvar": "3",
+  "octave": "3",
   "k": 34,
   "l": 243,
   "t": 249
@@ -278,7 +308,7 @@ data.floor=[
  {
   "color": "white",
   "note": "C",
-  "octvar": "4",
+  "octave": "4",
   "k": 35,
   "l": 373,
   "t": 139
@@ -286,7 +316,7 @@ data.floor=[
  {
   "color": "white",
   "note": "C",
-  "octvar": "5",
+  "octave": "5",
   "k": 36,
   "l": 239,
   "t": 51
@@ -294,7 +324,7 @@ data.floor=[
  {
   "color": "white",
   "note": "C",
-  "octvar": "6",
+  "octave": "6",
   "k": 37,
   "l": 261,
   "t": 391
@@ -302,7 +332,7 @@ data.floor=[
  {
   "color": "white",
   "note": "C",
-  "octvar": "7",
+  "octave": "7",
   "k": 38,
   "l": 66,
   "t": 147
@@ -310,7 +340,7 @@ data.floor=[
  {
   "color": "white",
   "note": "C",
-  "octvar": "8",
+  "octave": "8",
   "k": 39,
   "l": 343,
   "t": 213
@@ -318,7 +348,7 @@ data.floor=[
  {
   "color": "white",
   "note": "D",
-  "octvar": "1",
+  "octave": "1",
   "k": 40,
   "l": 276,
   "t": 271
@@ -326,7 +356,7 @@ data.floor=[
  {
   "color": "white",
   "note": "D",
-  "octvar": "2",
+  "octave": "2",
   "k": 41,
   "l": 130,
   "t": 293
@@ -334,7 +364,7 @@ data.floor=[
  {
   "color": "white",
   "note": "D",
-  "octvar": "3",
+  "octave": "3",
   "k": 42,
   "l": 170,
   "t": 307
@@ -342,7 +372,7 @@ data.floor=[
  {
   "color": "white",
   "note": "D",
-  "octvar": "4",
+  "octave": "4",
   "k": 43,
   "l": 356,
   "t": 361
@@ -350,7 +380,7 @@ data.floor=[
  {
   "color": "white",
   "note": "D",
-  "octvar": "5",
+  "octave": "5",
   "k": 44,
   "l": 218,
   "t": 317
@@ -358,7 +388,7 @@ data.floor=[
  {
   "color": "white",
   "note": "D",
-  "octvar": "6",
+  "octave": "6",
   "k": 45,
   "l": 94,
   "t": 66
@@ -366,7 +396,7 @@ data.floor=[
  {
   "color": "white",
   "note": "D",
-  "octvar": "7",
+  "octave": "7",
   "k": 46,
   "l": 92,
   "t": 327
@@ -374,7 +404,7 @@ data.floor=[
  {
   "color": "black",
   "note": "D",
-  "octvar": "1",
+  "octave": "1",
   "k": 47,
   "l": 240,
   "t": 355
@@ -382,7 +412,7 @@ data.floor=[
  {
   "color": "black",
   "note": "D",
-  "octvar": "2",
+  "octave": "2",
   "k": 48,
   "l": 337,
   "t": 292
@@ -390,7 +420,7 @@ data.floor=[
  {
   "color": "black",
   "note": "D",
-  "octvar": "3",
+  "octave": "3",
   "k": 49,
   "l": 168,
   "t": 74
@@ -398,7 +428,7 @@ data.floor=[
  {
   "color": "black",
   "note": "D",
-  "octvar": "4",
+  "octave": "4",
   "k": 50,
   "l": 242,
   "t": 40
@@ -406,7 +436,7 @@ data.floor=[
  {
   "color": "black",
   "note": "D",
-  "octvar": "5",
+  "octave": "5",
   "k": 51,
   "l": 20,
   "t": 213
@@ -414,7 +444,7 @@ data.floor=[
  {
   "color": "black",
   "note": "D",
-  "octvar": "6",
+  "octave": "6",
   "k": 52,
   "l": 283,
   "t": 204
@@ -422,7 +452,7 @@ data.floor=[
  {
   "color": "black",
   "note": "D",
-  "octvar": "7",
+  "octave": "7",
   "k": 53,
   "l": 257,
   "t": 23
@@ -430,7 +460,7 @@ data.floor=[
  {
   "color": "white",
   "note": "E",
-  "octvar": "1",
+  "octave": "1",
   "k": 54,
   "l": 338,
   "t": 175
@@ -438,7 +468,7 @@ data.floor=[
  {
   "color": "white",
   "note": "E",
-  "octvar": "2",
+  "octave": "2",
   "k": 55,
   "l": 397,
   "t": 130
@@ -446,7 +476,7 @@ data.floor=[
  {
   "color": "white",
   "note": "E",
-  "octvar": "3",
+  "octave": "3",
   "k": 56,
   "l": 101,
   "t": 70
@@ -454,7 +484,7 @@ data.floor=[
  {
   "color": "white",
   "note": "E",
-  "octvar": "4",
+  "octave": "4",
   "k": 57,
   "l": 341,
   "t": 113
@@ -462,7 +492,7 @@ data.floor=[
  {
   "color": "white",
   "note": "E",
-  "octvar": "5",
+  "octave": "5",
   "k": 58,
   "l": 287,
   "t": 250
@@ -470,7 +500,7 @@ data.floor=[
  {
   "color": "white",
   "note": "E",
-  "octvar": "6",
+  "octave": "6",
   "k": 59,
   "l": 156,
   "t": 349
@@ -478,7 +508,7 @@ data.floor=[
  {
   "color": "white",
   "note": "E",
-  "octvar": "7",
+  "octave": "7",
   "k": 60,
   "l": 95,
   "t": 293
@@ -486,7 +516,7 @@ data.floor=[
  {
   "color": "black",
   "note": "E",
-  "octvar": "1",
+  "octave": "1",
   "k": 61,
   "l": 249,
   "t": 268
@@ -494,7 +524,7 @@ data.floor=[
  {
   "color": "black",
   "note": "E",
-  "octvar": "2",
+  "octave": "2",
   "k": 62,
   "l": 224,
   "t": 13
@@ -502,7 +532,7 @@ data.floor=[
  {
   "color": "black",
   "note": "E",
-  "octvar": "3",
+  "octave": "3",
   "k": 63,
   "l": 251,
   "t": 248
@@ -510,7 +540,7 @@ data.floor=[
  {
   "color": "black",
   "note": "E",
-  "octvar": "4",
+  "octave": "4",
   "k": 64,
   "l": 84,
   "t": 51
@@ -518,7 +548,7 @@ data.floor=[
  {
   "color": "black",
   "note": "E",
-  "octvar": "5",
+  "octave": "5",
   "k": 65,
   "l": 330,
   "t": 48
@@ -526,7 +556,7 @@ data.floor=[
  {
   "color": "black",
   "note": "E",
-  "octvar": "6",
+  "octave": "6",
   "k": 66,
   "l": 126,
   "t": 144
@@ -534,7 +564,7 @@ data.floor=[
  {
   "color": "black",
   "note": "E",
-  "octvar": "7",
+  "octave": "7",
   "k": 67,
   "l": 302,
   "t": 264
@@ -542,7 +572,7 @@ data.floor=[
  {
   "color": "white",
   "note": "F",
-  "octvar": "1",
+  "octave": "1",
   "k": 68,
   "l": 232,
   "t": 357
@@ -550,7 +580,7 @@ data.floor=[
  {
   "color": "white",
   "note": "F",
-  "octvar": "2",
+  "octave": "2",
   "k": 69,
   "l": 66,
   "t": 7
@@ -558,7 +588,7 @@ data.floor=[
  {
   "color": "white",
   "note": "F",
-  "octvar": "3",
+  "octave": "3",
   "k": 70,
   "l": 300,
   "t": 118
@@ -566,7 +596,7 @@ data.floor=[
  {
   "color": "white",
   "note": "F",
-  "octvar": "4",
+  "octave": "4",
   "k": 71,
   "l": 77,
   "t": 101
@@ -574,7 +604,7 @@ data.floor=[
  {
   "color": "white",
   "note": "F",
-  "octvar": "5",
+  "octave": "5",
   "k": 72,
   "l": 174,
   "t": 262
@@ -582,7 +612,7 @@ data.floor=[
  {
   "color": "white",
   "note": "F",
-  "octvar": "6",
+  "octave": "6",
   "k": 73,
   "l": 181,
   "t": 27
@@ -590,7 +620,7 @@ data.floor=[
  {
   "color": "white",
   "note": "F",
-  "octvar": "7",
+  "octave": "7",
   "k": 74,
   "l": 399,
   "t": 63
@@ -598,7 +628,7 @@ data.floor=[
  {
   "color": "white",
   "note": "G",
-  "octvar": "1",
+  "octave": "1",
   "k": 75,
   "l": 107,
   "t": 45
@@ -606,7 +636,7 @@ data.floor=[
  {
   "color": "white",
   "note": "G",
-  "octvar": "2",
+  "octave": "2",
   "k": 76,
   "l": 91,
   "t": 272
@@ -614,7 +644,7 @@ data.floor=[
  {
   "color": "white",
   "note": "G",
-  "octvar": "3",
+  "octave": "3",
   "k": 77,
   "l": 146,
   "t": 108
@@ -622,7 +652,7 @@ data.floor=[
  {
   "color": "white",
   "note": "G",
-  "octvar": "4",
+  "octave": "4",
   "k": 78,
   "l": 194,
   "t": 185
@@ -630,7 +660,7 @@ data.floor=[
  {
   "color": "white",
   "note": "G",
-  "octvar": "5",
+  "octave": "5",
   "k": 79,
   "l": 284,
   "t": 294
@@ -638,7 +668,7 @@ data.floor=[
  {
   "color": "white",
   "note": "G",
-  "octvar": "6",
+  "octave": "6",
   "k": 80,
   "l": 341,
   "t": 375
@@ -646,7 +676,7 @@ data.floor=[
  {
   "color": "white",
   "note": "G",
-  "octvar": "7",
+  "octave": "7",
   "k": 81,
   "l": 8,
   "t": 58
@@ -654,7 +684,7 @@ data.floor=[
  {
   "color": "black",
   "note": "G",
-  "octvar": "1",
+  "octave": "1",
   "k": 82,
   "l": 40,
   "t": 38
@@ -662,7 +692,7 @@ data.floor=[
  {
   "color": "black",
   "note": "G",
-  "octvar": "2",
+  "octave": "2",
   "k": 83,
   "l": 101,
   "t": 209
@@ -670,7 +700,7 @@ data.floor=[
  {
   "color": "black",
   "note": "G",
-  "octvar": "3",
+  "octave": "3",
   "k": 84,
   "l": 239,
   "t": 275
@@ -678,7 +708,7 @@ data.floor=[
  {
   "color": "black",
   "note": "G",
-  "octvar": "4",
+  "octave": "4",
   "k": 85,
   "l": 108,
   "t": 304
@@ -686,7 +716,7 @@ data.floor=[
  {
   "color": "black",
   "note": "G",
-  "octvar": "5",
+  "octave": "5",
   "k": 86,
   "l": 232,
   "t": 249
@@ -694,7 +724,7 @@ data.floor=[
  {
   "color": "black",
   "note": "G",
-  "octvar": "6",
+  "octave": "6",
   "k": 87,
   "l": 189,
   "t": 343
@@ -702,7 +732,7 @@ data.floor=[
  {
   "color": "black",
   "note": "G",
-  "octvar": "7",
+  "octave": "7",
   "k": 88,
   "l": 197,
   "t": 273
@@ -712,616 +742,616 @@ data.piano=[
  {
   "color": "white",
   "note": "A",
-  "octvar": "0",
+  "octave": "0",
   "k": 1,
   "box": null
  },
  {
   "color": "white",
   "note": "A",
-  "octvar": "1",
+  "octave": "1",
   "k": 2,
   "box": null
  },
  {
   "color": "white",
   "note": "A",
-  "octvar": "2",
+  "octave": "2",
   "k": 3,
   "box": null
  },
  {
   "color": "white",
   "note": "A",
-  "octvar": "3",
+  "octave": "3",
   "k": 4,
   "box": null
  },
  {
   "color": "white",
   "note": "A",
-  "octvar": "4",
+  "octave": "4",
   "k": 5,
   "box": null
  },
  {
   "color": "white",
   "note": "A",
-  "octvar": "5",
+  "octave": "5",
   "k": 6,
   "box": null
  },
  {
   "color": "white",
   "note": "A",
-  "octvar": "6",
+  "octave": "6",
   "k": 7,
   "box": null
  },
  {
   "color": "white",
   "note": "A",
-  "octvar": "7",
+  "octave": "7",
   "k": 8,
   "box": null
  },
  {
   "color": "black",
   "note": "A",
-  "octvar": "1",
+  "octave": "1",
   "k": 9,
   "box": null
  },
  {
   "color": "black",
   "note": "A",
-  "octvar": "2",
+  "octave": "2",
   "k": 10,
   "box": null
  },
  {
   "color": "black",
   "note": "A",
-  "octvar": "3",
+  "octave": "3",
   "k": 11,
   "box": null
  },
  {
   "color": "black",
   "note": "A",
-  "octvar": "4",
+  "octave": "4",
   "k": 12,
   "box": null
  },
  {
   "color": "black",
   "note": "A",
-  "octvar": "5",
+  "octave": "5",
   "k": 13,
   "box": null
  },
  {
   "color": "black",
   "note": "A",
-  "octvar": "6",
+  "octave": "6",
   "k": 14,
   "box": null
  },
  {
   "color": "black",
   "note": "A",
-  "octvar": "7",
+  "octave": "7",
   "k": 15,
   "box": null
  },
  {
   "color": "white",
   "note": "B",
-  "octvar": "0",
+  "octave": "0",
   "k": 16,
   "box": null
  },
  {
   "color": "white",
   "note": "B",
-  "octvar": "1",
+  "octave": "1",
   "k": 17,
   "box": null
  },
  {
   "color": "white",
   "note": "B",
-  "octvar": "2",
+  "octave": "2",
   "k": 18,
   "box": null
  },
  {
   "color": "white",
   "note": "B",
-  "octvar": "3",
+  "octave": "3",
   "k": 19,
   "box": null
  },
  {
   "color": "white",
   "note": "B",
-  "octvar": "4",
+  "octave": "4",
   "k": 20,
   "box": null
  },
  {
   "color": "white",
   "note": "B",
-  "octvar": "5",
+  "octave": "5",
   "k": 21,
   "box": null
  },
  {
   "color": "white",
   "note": "B",
-  "octvar": "6",
+  "octave": "6",
   "k": 22,
   "box": null
  },
  {
   "color": "white",
   "note": "B",
-  "octvar": "7",
+  "octave": "7",
   "k": 23,
   "box": null
  },
  {
   "color": "black",
   "note": "B",
-  "octvar": "0",
+  "octave": "0",
   "k": 24,
   "box": null
  },
  {
   "color": "black",
   "note": "B",
-  "octvar": "1",
+  "octave": "1",
   "k": 25,
   "box": null
  },
  {
   "color": "black",
   "note": "B",
-  "octvar": "2",
+  "octave": "2",
   "k": 26,
   "box": null
  },
  {
   "color": "black",
   "note": "B",
-  "octvar": "3",
+  "octave": "3",
   "k": 27,
   "box": null
  },
  {
   "color": "black",
   "note": "B",
-  "octvar": "4",
+  "octave": "4",
   "k": 28,
   "box": null
  },
  {
   "color": "black",
   "note": "B",
-  "octvar": "5",
+  "octave": "5",
   "k": 29,
   "box": null
  },
  {
   "color": "black",
   "note": "B",
-  "octvar": "6",
+  "octave": "6",
   "k": 30,
   "box": null
  },
  {
   "color": "black",
   "note": "B",
-  "octvar": "7",
+  "octave": "7",
   "k": 31,
   "box": null
  },
  {
   "color": "white",
   "note": "C",
-  "octvar": "1",
+  "octave": "1",
   "k": 32,
   "box": null
  },
  {
   "color": "white",
   "note": "C",
-  "octvar": "2",
+  "octave": "2",
   "k": 33,
   "box": null
  },
  {
   "color": "white",
   "note": "C",
-  "octvar": "3",
+  "octave": "3",
   "k": 34,
   "box": null
  },
  {
   "color": "white",
   "note": "C",
-  "octvar": "4",
+  "octave": "4",
   "k": 35,
   "box": null
  },
  {
   "color": "white",
   "note": "C",
-  "octvar": "5",
+  "octave": "5",
   "k": 36,
   "box": null
  },
  {
   "color": "white",
   "note": "C",
-  "octvar": "6",
+  "octave": "6",
   "k": 37,
   "box": null
  },
  {
   "color": "white",
   "note": "C",
-  "octvar": "7",
+  "octave": "7",
   "k": 38,
   "box": null
  },
  {
   "color": "white",
   "note": "C",
-  "octvar": "8",
+  "octave": "8",
   "k": 39,
   "box": null
  },
  {
   "color": "white",
   "note": "D",
-  "octvar": "1",
+  "octave": "1",
   "k": 40,
   "box": null
  },
  {
   "color": "white",
   "note": "D",
-  "octvar": "2",
+  "octave": "2",
   "k": 41,
   "box": null
  },
  {
   "color": "white",
   "note": "D",
-  "octvar": "3",
+  "octave": "3",
   "k": 42,
   "box": null
  },
  {
   "color": "white",
   "note": "D",
-  "octvar": "4",
+  "octave": "4",
   "k": 43,
   "box": null
  },
  {
   "color": "white",
   "note": "D",
-  "octvar": "5",
+  "octave": "5",
   "k": 44,
   "box": null
  },
  {
   "color": "white",
   "note": "D",
-  "octvar": "6",
+  "octave": "6",
   "k": 45,
   "box": null
  },
  {
   "color": "white",
   "note": "D",
-  "octvar": "7",
+  "octave": "7",
   "k": 46,
   "box": null
  },
  {
   "color": "black",
   "note": "D",
-  "octvar": "1",
+  "octave": "1",
   "k": 47,
   "box": null
  },
  {
   "color": "black",
   "note": "D",
-  "octvar": "2",
+  "octave": "2",
   "k": 48,
   "box": null
  },
  {
   "color": "black",
   "note": "D",
-  "octvar": "3",
+  "octave": "3",
   "k": 49,
   "box": null
  },
  {
   "color": "black",
   "note": "D",
-  "octvar": "4",
+  "octave": "4",
   "k": 50,
   "box": null
  },
  {
   "color": "black",
   "note": "D",
-  "octvar": "5",
+  "octave": "5",
   "k": 51,
   "box": null
  },
  {
   "color": "black",
   "note": "D",
-  "octvar": "6",
+  "octave": "6",
   "k": 52,
   "box": null
  },
  {
   "color": "black",
   "note": "D",
-  "octvar": "7",
+  "octave": "7",
   "k": 53,
   "box": null
  },
  {
   "color": "white",
   "note": "E",
-  "octvar": "1",
+  "octave": "1",
   "k": 54,
   "box": null
  },
  {
   "color": "white",
   "note": "E",
-  "octvar": "2",
+  "octave": "2",
   "k": 55,
   "box": null
  },
  {
   "color": "white",
   "note": "E",
-  "octvar": "3",
+  "octave": "3",
   "k": 56,
   "box": null
  },
  {
   "color": "white",
   "note": "E",
-  "octvar": "4",
+  "octave": "4",
   "k": 57,
   "box": null
  },
  {
   "color": "white",
   "note": "E",
-  "octvar": "5",
+  "octave": "5",
   "k": 58,
   "box": null
  },
  {
   "color": "white",
   "note": "E",
-  "octvar": "6",
+  "octave": "6",
   "k": 59,
   "box": null
  },
  {
   "color": "white",
   "note": "E",
-  "octvar": "7",
+  "octave": "7",
   "k": 60,
   "box": null
  },
  {
   "color": "black",
   "note": "E",
-  "octvar": "1",
+  "octave": "1",
   "k": 61,
   "box": null
  },
  {
   "color": "black",
   "note": "E",
-  "octvar": "2",
+  "octave": "2",
   "k": 62,
   "box": null
  },
  {
   "color": "black",
   "note": "E",
-  "octvar": "3",
+  "octave": "3",
   "k": 63,
   "box": null
  },
  {
   "color": "black",
   "note": "E",
-  "octvar": "4",
+  "octave": "4",
   "k": 64,
   "box": null
  },
  {
   "color": "black",
   "note": "E",
-  "octvar": "5",
+  "octave": "5",
   "k": 65,
   "box": null
  },
  {
   "color": "black",
   "note": "E",
-  "octvar": "6",
+  "octave": "6",
   "k": 66,
   "box": null
  },
  {
   "color": "black",
   "note": "E",
-  "octvar": "7",
+  "octave": "7",
   "k": 67,
   "box": null
  },
  {
   "color": "white",
   "note": "F",
-  "octvar": "1",
+  "octave": "1",
   "k": 68,
   "box": null
  },
  {
   "color": "white",
   "note": "F",
-  "octvar": "2",
+  "octave": "2",
   "k": 69,
   "box": null
  },
  {
   "color": "white",
   "note": "F",
-  "octvar": "3",
+  "octave": "3",
   "k": 70,
   "box": null
  },
  {
   "color": "white",
   "note": "F",
-  "octvar": "4",
+  "octave": "4",
   "k": 71,
   "box": null
  },
  {
   "color": "white",
   "note": "F",
-  "octvar": "5",
+  "octave": "5",
   "k": 72,
   "box": null
  },
  {
   "color": "white",
   "note": "F",
-  "octvar": "6",
+  "octave": "6",
   "k": 73,
   "box": null
  },
  {
   "color": "white",
   "note": "F",
-  "octvar": "7",
+  "octave": "7",
   "k": 74,
   "box": null
  },
  {
   "color": "white",
   "note": "G",
-  "octvar": "1",
+  "octave": "1",
   "k": 75,
   "box": null
  },
  {
   "color": "white",
   "note": "G",
-  "octvar": "2",
+  "octave": "2",
   "k": 76,
   "box": null
  },
  {
   "color": "white",
   "note": "G",
-  "octvar": "3",
+  "octave": "3",
   "k": 77,
   "box": null
  },
  {
   "color": "white",
   "note": "G",
-  "octvar": "4",
+  "octave": "4",
   "k": 78,
   "box": null
  },
  {
   "color": "white",
   "note": "G",
-  "octvar": "5",
+  "octave": "5",
   "k": 79,
   "box": null
  },
  {
   "color": "white",
   "note": "G",
-  "octvar": "6",
+  "octave": "6",
   "k": 80,
   "box": null
  },
  {
   "color": "white",
   "note": "G",
-  "octvar": "7",
+  "octave": "7",
   "k": 81,
   "box": null
  },
  {
   "color": "black",
   "note": "G",
-  "octvar": "1",
+  "octave": "1",
   "k": 82,
   "box": null
  },
  {
   "color": "black",
   "note": "G",
-  "octvar": "2",
+  "octave": "2",
   "k": 83,
   "box": null
  },
  {
   "color": "black",
   "note": "G",
-  "octvar": "3",
+  "octave": "3",
   "k": 84,
   "box": null
  },
  {
   "color": "black",
   "note": "G",
-  "octvar": "4",
+  "octave": "4",
   "k": 85,
   "box": null
  },
  {
   "color": "black",
   "note": "G",
-  "octvar": "5",
+  "octave": "5",
   "k": 86,
   "box": null
  },
  {
   "color": "black",
   "note": "G",
-  "octvar": "6",
+  "octave": "6",
   "k": 87,
   "box": null
  },
  {
   "color": "black",
   "note": "G",
-  "octvar": "7",
+  "octave": "7",
   "k": 88,
   "box": null
  }
@@ -1397,6 +1427,8 @@ export function dropSlot(box, slot) {
   emitChange();
 }
 
+var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
 export function bSuccess() {
   return data.piano.every(item => {
     return item.box && (item.box.k == item.k);
@@ -1405,4 +1437,8 @@ export function bSuccess() {
 
 export function msg(txt) {
   data.msg = txt;
+}
+
+export function getAudioCtx() {
+  return audioCtx;
 }
