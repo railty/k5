@@ -2,5 +2,7 @@
   "name": "k5",
   "version": "1.0.0",
   "author": "shawn ning <zxning@gmail.com>",
-  "dependencies": {}
+  "dependencies": {
+    "bootstrap": "~3.3.5"
+  }
 }

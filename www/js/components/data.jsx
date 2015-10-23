@@ -33,38 +33,65 @@ class Iterator{
 }
 
 class Keyboard{
-  constructor(firstNote, lastNote) {
+  constructor(name, firstNote, lastNote) {
+    this.name = name;
      this.firstNote = firstNote;
      this.lastNote = lastNote;
   }
+
   [Symbol.iterator]() {
     var i = new Iterator(this);
     return i;
   }
 }
-/*
-32
-C3-G5
-F2-C5
-36
-C3-B5
-F2-E5
-37
-C2-C5
-F2-F5
-49
-C2-C6
-54
-C2-F6
-61
-C1-C6
-76
-E1-G7
-88
-A0-C8
-*/
+Keyboard.list = [{
+  name: '32 Keys',
+  firstNote: 'C3',
+  lastNote: 'G5'
+},{
+  name: '32 Keys Alt',
+  firstNote: 'F2',
+  lastNote: 'C5'
+},{
+  name: '36 Keys',
+  firstNote: 'C3',
+  lastNote: 'B5'
+},{
+  name: '36 Keys Alt',
+  firstNote: 'F2',
+  lastNote: 'E5'
+},{
+  name: '37 Keys',
+  firstNote: 'C2',
+  lastNote: 'C5'
+},{
+  name: '37 Keys Alt',
+  firstNote: 'F2',
+  lastNote: 'F5'
+},{
+  name: '49 Keys',
+  firstNote: 'C2',
+  lastNote: 'C6'
+},{
+  name: '54 Keys',
+  firstNote: 'C2',
+  lastNote: 'F6'
+},{
+  name: '61 Keys',
+  firstNote: 'C1',
+  lastNote: 'C6'
+},{
+  name: '76 Keys',
+  firstNote: 'E1',
+  lastNote: 'G7'
+},{
+  name: '88 Keys',
+  firstNote: 'A0',
+  lastNote: 'C8'
+}];
+
 //49 keys
-var keys = new Keyboard('C2', 'C6');
+var keys = new Keyboard('49 Keys', 'C2', 'C6');
 var id = 0;
 var height = window.innerHeight - 350;
 var width = window.innerWidth - 50;
@@ -176,3 +203,4 @@ export function msg(txt) {
 export function getAudioCtx() {
   return audioCtx;
 }
+export const keyboard_list = Keyboard.list;

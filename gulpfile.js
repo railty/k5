@@ -3,9 +3,10 @@ var livereload = require('gulp-livereload');
 var webpack = require('webpack-stream')
 var staticHash = require('gulp-static-hash');
 var uglify = require('gulp-uglify');
-var cordova = require('cordova')
-var rimraf = require('rimraf')
-var runSequence = require('run-sequence')
+var cordova = require('cordova');
+var rimraf = require('rimraf');
+var runSequence = require('run-sequence');
+var less = require('gulp-less');
 
 var tasks = {
   webpack: function() {
@@ -89,3 +90,9 @@ gulp.task('clean', function(cb) {
 gulp.task('install', function(cb) {
     return cordova.platform('add', ['browser', 'ios', 'android'], cb)
 })
+
+//copy the bootstrap to local folder, compile bootstrap.less to css, which is not necessary but learned a lot
+gulp.task('bootstrap', function() {
+  //gulp.src('bower_components/bootstrap/dist/fonts/*').pipe(gulp.dest('www/fonts'));
+  gulp.src('www/less/bootstrap.less').pipe(less()).pipe(gulp.dest('bower_components/bootstrap/dist/css'));
+});

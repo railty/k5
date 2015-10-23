@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import Box from './Box';
+import Box from './box';
 
 const styles = {
   display: 'inline-block',
