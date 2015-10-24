@@ -33,10 +33,13 @@ class Iterator{
 }
 
 class Keyboard{
-  constructor(name, firstNote, lastNote) {
-    this.name = name;
-     this.firstNote = firstNote;
-     this.lastNote = lastNote;
+  constructor(name) {
+    var keyboard = Keyboard.list.find(function(k){
+      return k.name == name;
+    });
+    this.name = keyboard.name;
+    this.firstNote = keyboard.firstNote;
+    this.lastNote = keyboard.lastNote;
   }
 
   [Symbol.iterator]() {
@@ -44,6 +47,7 @@ class Keyboard{
     return i;
   }
 }
+
 Keyboard.list = [{
   name: '32 Keys',
   firstNote: 'C3',
@@ -90,35 +94,7 @@ Keyboard.list = [{
   lastNote: 'C8'
 }];
 
-//49 keys
-var keys = new Keyboard('49 Keys', 'C2', 'C6');
-var id = 0;
-var height = window.innerHeight - 350;
-var width = window.innerWidth - 50;
-for (let key of keys) {
-  console.log(key);
-  id++;
-  data.piano.push({
-    color: key.length == 2 ? 'white' : 'black',
-    note: key.substr(0, key.length-1),
-    octave: key.substr(-1),
-    k: id,
-    box: null,
-  });
-
-  if ((key.length==3)&&((key.substr(0, 2)=='Cb')||(key.substr(0, 2)=='Fb'))){
-    console.log("skip " + key);
-  }else{
-    data.floor.push({
-      color: key.length == 2 ? 'white' : 'black',
-      note: key.substr(0, key.length-1),
-      octave: key.substr(-1),
-      k: id,
-      l: Math.round(Math.random()*width),
-      t: Math.round(Math.random()*height),
-    });
-  }
-}
+initGame('49 Keys');
 
 let observer = null;
 
@@ -203,4 +179,41 @@ export function msg(txt) {
 export function getAudioCtx() {
   return audioCtx;
 }
-export const keyboard_list = Keyboard.list;
+
+function initGame(keyboardName){
+  var keys = new Keyboard(keyboardName);
+  var id = 0;
+  var height = window.innerHeight - 350;
+  var width = window.innerWidth - 50;
+  data.floor = [];
+  data.piano = [];
+  for (let key of keys) {
+    id++;
+    data.piano.push({
+      color: key.length == 2 ? 'white' : 'black',
+      note: key.substr(0, key.length-1),
+      octave: key.substr(-1),
+      k: id,
+      box: null,
+    });
+
+    if ((key.length==3)&&((key.substr(0, 2)=='Cb')||(key.substr(0, 2)=='Fb'))){
+//      console.log("skip " + key);
+    }else{
+      data.floor.push({
+        color: key.length == 2 ? 'white' : 'black',
+        note: key.substr(0, key.length-1),
+        octave: key.substr(-1),
+        k: id,
+        l: Math.round(Math.random()*width),
+        t: Math.round(Math.random()*height),
+      });
+    }
+  }
+}
+
+export const keyboardList = Keyboard.list;
+export function restartGame(keyboardName){
+  initGame(keyboardName);
+  emitChange();
+}

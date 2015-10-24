@@ -9,7 +9,7 @@ import { Router, Route, Link, IndexRoute } from 'react-router';
 
 import Game from './components/game';
 import Graph from './components/graph';
-import { keyboard_list } from './components/data';
+import { keyboardList, restartGame } from './components/data';
 
 Promise.onPossiblyUnhandledRejection(err => {
     throw err
@@ -26,15 +26,20 @@ window.onerror = (msg, url, line, column, e) => {
 }
 
 class App extends React.Component {
-    handleClick(x, event) {
-      console.log(x);
+    handleClick(keyboard, event) {
+      restartGame(keyboard);
     }
 
     render () {
-
-      for (var k of keyboard_list){
-        console.log(k.name);
+      const menuItems = [];
+      var i=0;
+      for (var k of keyboardList){
+        i++;
+        menuItems.push(
+          <li key={i}><a onClick={this.handleClick.bind(this, k.name)}>{k.name}</a></li>
+        );
       }
+
       return (
           <div>
           <nav className="navbar navbar-default">
@@ -63,17 +68,7 @@ class App extends React.Component {
                     <ul className="dropdown-menu">
                       <li><a href="#">Keyboard</a></li>
                       <li role="separator" className="divider"></li>
-                      <li><a onClick={this.handleClick.bind(this, "32 Keys")}>32 Keys</a></li>
-                      <li><a href="#">32 Keys Alt</a></li>
-                      <li><a href="#">36 Keys</a></li>
-                      <li><a href="#">36 Keys Alt</a></li>
-                      <li><a href="#">37 Keys</a></li>
-                      <li><a href="#">37 Keys Alt</a></li>
-                      <li><a href="#">49 Keys Alt</a></li>
-                      <li><a href="#">54 Keys Alt</a></li>
-                      <li><a href="#">61 Keys Alt</a></li>
-                      <li><a href="#">76 Keys Alt</a></li>
-                      <li><a href="#">88 Keys Alt</a></li>
+                      {menuItems}
                     </ul>
                   </li>
                 </ul>
@@ -81,6 +76,7 @@ class App extends React.Component {
             </div>
           </nav>
 
+          {this.props.children}
 
 
           </div>
@@ -114,12 +110,6 @@ class App2 extends React.Component {
 
 try {
     document.addEventListener('deviceready', () => {
-      $('#myButton').on('click', function () {
-        var btn = $(this).button('loading');
-        //btn.button('reset');
-      });
-
-
         React.render((
           <Router>
             <Route path="/" component={App}>

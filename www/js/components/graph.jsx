@@ -95,14 +95,10 @@ class Graph extends React.Component {
     }
 
     render () {
-      console.log(this.channel1);
       return (
         <div>
           <canvas className="visualizer" width="640" height="200" ref="canvas"></canvas>
-
         </div>
-
-
       )
     }
 }
