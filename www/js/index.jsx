@@ -9,7 +9,7 @@ import { Router, Route, Link, IndexRoute } from 'react-router';
 
 import Game from './components/game';
 import Graph from './components/graph';
-import { keyboardList, restartGame } from './components/data';
+import { keyboardList, restartGame, saveGame } from './components/data';
 
 Promise.onPossiblyUnhandledRejection(err => {
     throw err
@@ -26,8 +26,20 @@ window.onerror = (msg, url, line, column, e) => {
 }
 
 class App extends React.Component {
-    handleClick(keyboard, event) {
-      restartGame(keyboard);
+    handleClick(menu, event) {
+      switch(menu) {
+        case 'save':
+          saveGame();
+          break;
+        case 'load':
+            //
+          break;
+        case 'restart':
+          restartGame();
+          break;
+        default:
+          restartGame(menu);
+      }
     }
 
     render () {
@@ -66,6 +78,9 @@ class App extends React.Component {
                       <span className="glyphicon glyphicon-cog" aria-hidden="true"></span>
                     </a>
                     <ul className="dropdown-menu">
+                      <li><a onClick={this.handleClick.bind(this, 'save')}>Save</a></li>
+                      <li><a onClick={this.handleClick.bind(this, 'load')}>Load</a></li>
+                      <li><a onClick={this.handleClick.bind(this, 'restart')}>Restart</a></li>
                       <li><a href="#">Keyboard</a></li>
                       <li role="separator" className="divider"></li>
                       {menuItems}

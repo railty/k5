@@ -1,9 +1,3 @@
-let data = {
-  msg: 'ready',
-  floor: [],
-  piano: [],
-};
-
 class Iterator{
   constructor(keyboard) {
      this.keyboard = keyboard;
@@ -94,7 +88,52 @@ Keyboard.list = [{
   lastNote: 'C8'
 }];
 
-initGame('49 Keys');
+let data = {
+  msg: 'ready',
+  floor: [],
+  piano: [],
+  keyboardName: '32 Keys',
+  save: function(){
+    console.log('saving');
+    var str = JSON.stringify(this);
+    console.log(str);
+  },
+  initGame: function(keyboardName){
+    if (keyboardName) this.keyboardName = keyboardName;
+
+    var keys = new Keyboard(this.keyboardName);
+    var id = 0;
+    var height = window.innerHeight - 350;
+    var width = window.innerWidth - 50;
+    this.floor = [];
+    this.piano = [];
+    for (let key of keys) {
+      id++;
+      this.piano.push({
+        color: key.length == 2 ? 'white' : 'black',
+        note: key.substr(0, key.length-1),
+        octave: key.substr(-1),
+        k: id,
+        box: null,
+      });
+
+      if ((key.length==3)&&((key.substr(0, 2)=='Cb')||(key.substr(0, 2)=='Fb'))){
+  //      console.log("skip " + key);
+      }else{
+        this.floor.push({
+          color: key.length == 2 ? 'white' : 'black',
+          note: key.substr(0, key.length-1),
+          octave: key.substr(-1),
+          k: id,
+          l: Math.round(Math.random()*width),
+          t: Math.round(Math.random()*height),
+        });
+      }
+    }
+  }
+};
+
+data.initGame();
 
 let observer = null;
 
@@ -164,8 +203,6 @@ export function dropSlot(box, slot) {
   emitChange();
 }
 
-var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-
 export function bSuccess() {
   return data.piano.every(item => {
     return item.box && (item.box.k == item.k);
@@ -176,44 +213,17 @@ export function msg(txt) {
   data.msg = txt;
 }
 
+var audioCtx;
 export function getAudioCtx() {
+  if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
   return audioCtx;
-}
-
-function initGame(keyboardName){
-  var keys = new Keyboard(keyboardName);
-  var id = 0;
-  var height = window.innerHeight - 350;
-  var width = window.innerWidth - 50;
-  data.floor = [];
-  data.piano = [];
-  for (let key of keys) {
-    id++;
-    data.piano.push({
-      color: key.length == 2 ? 'white' : 'black',
-      note: key.substr(0, key.length-1),
-      octave: key.substr(-1),
-      k: id,
-      box: null,
-    });
-
-    if ((key.length==3)&&((key.substr(0, 2)=='Cb')||(key.substr(0, 2)=='Fb'))){
-//      console.log("skip " + key);
-    }else{
-      data.floor.push({
-        color: key.length == 2 ? 'white' : 'black',
-        note: key.substr(0, key.length-1),
-        octave: key.substr(-1),
-        k: id,
-        l: Math.round(Math.random()*width),
-        t: Math.round(Math.random()*height),
-      });
-    }
-  }
 }
 
 export const keyboardList = Keyboard.list;
 export function restartGame(keyboardName){
-  initGame(keyboardName);
+  data.initGame(keyboardName);
   emitChange();
+}
+export function saveGame(){
+  data.save();
 }
