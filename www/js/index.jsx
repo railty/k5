@@ -9,7 +9,8 @@ import { Router, Route, Link, IndexRoute } from 'react-router';
 
 import Game from './components/game';
 import Graph from './components/graph';
-import { keyboardList, restartGame, saveGame } from './components/data';
+import { restartGame, saveGame, loadGame } from './components/data';
+import Keyboard from './components/keyboard';
 
 Promise.onPossiblyUnhandledRejection(err => {
     throw err
@@ -32,7 +33,7 @@ class App extends React.Component {
           saveGame();
           break;
         case 'load':
-            //
+          loadGame();
           break;
         case 'restart':
           restartGame();
@@ -45,7 +46,7 @@ class App extends React.Component {
     render () {
       const menuItems = [];
       var i=0;
-      for (var k of keyboardList){
+      for (var k of Keyboard.list){
         i++;
         menuItems.push(
           <li key={i}><a onClick={this.handleClick.bind(this, k.name)}>{k.name}</a></li>

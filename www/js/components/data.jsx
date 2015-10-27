@@ -1,142 +1,67 @@
-class Iterator{
-  constructor(keyboard) {
-     this.keyboard = keyboard;
-     this.note = this.keyboard.firstNote;
-     this.done = false;
-  }
-  next() {
-    var note = this.note;
-    var done = this.done;
-    this.done = note==this.keyboard.lastNote;
+import Keyboard from './keyboard';
+import {readFile, writeFile} from './file';
 
-    var n = note[0];
-    var o = note.substr(-1);
+class Data{
+  constructor(dt) {
+    if (typeof dt == "string"){
+      this.keyboardName = dt;
+      this.msg = 'ready';
+      this.floor = [];
+      this.piano = [];
 
-    if (note.length==2){
-      n = String.fromCharCode(n.charCodeAt(0) + 1);
-      if (n == 'H') {
-        n = 'A';
-        o = String.fromCharCode(o.charCodeAt(0) + 1);
-      }
-      this.note = n + 'b' + o;
-    }else{
-      this.note = n + o;
-    }
-    return { value: note, done: done };
-  }
-}
+      var keys = new Keyboard(this.keyboardName);
+      var id = 0;
+      var height = window.innerHeight - 350;
+      var width = window.innerWidth - 50;
 
-class Keyboard{
-  constructor(name) {
-    var keyboard = Keyboard.list.find(function(k){
-      return k.name == name;
-    });
-    this.name = keyboard.name;
-    this.firstNote = keyboard.firstNote;
-    this.lastNote = keyboard.lastNote;
-  }
-
-  [Symbol.iterator]() {
-    var i = new Iterator(this);
-    return i;
-  }
-}
-
-Keyboard.list = [{
-  name: '32 Keys',
-  firstNote: 'C3',
-  lastNote: 'G5'
-},{
-  name: '32 Keys Alt',
-  firstNote: 'F2',
-  lastNote: 'C5'
-},{
-  name: '36 Keys',
-  firstNote: 'C3',
-  lastNote: 'B5'
-},{
-  name: '36 Keys Alt',
-  firstNote: 'F2',
-  lastNote: 'E5'
-},{
-  name: '37 Keys',
-  firstNote: 'C2',
-  lastNote: 'C5'
-},{
-  name: '37 Keys Alt',
-  firstNote: 'F2',
-  lastNote: 'F5'
-},{
-  name: '49 Keys',
-  firstNote: 'C2',
-  lastNote: 'C6'
-},{
-  name: '54 Keys',
-  firstNote: 'C2',
-  lastNote: 'F6'
-},{
-  name: '61 Keys',
-  firstNote: 'C1',
-  lastNote: 'C6'
-},{
-  name: '76 Keys',
-  firstNote: 'E1',
-  lastNote: 'G7'
-},{
-  name: '88 Keys',
-  firstNote: 'A0',
-  lastNote: 'C8'
-}];
-
-let data = {
-  msg: 'ready',
-  floor: [],
-  piano: [],
-  keyboardName: '32 Keys',
-  save: function(){
-    console.log('saving');
-    var str = JSON.stringify(this);
-    console.log(str);
-  },
-  initGame: function(keyboardName){
-    if (keyboardName) this.keyboardName = keyboardName;
-
-    var keys = new Keyboard(this.keyboardName);
-    var id = 0;
-    var height = window.innerHeight - 350;
-    var width = window.innerWidth - 50;
-    this.floor = [];
-    this.piano = [];
-    for (let key of keys) {
-      id++;
-      this.piano.push({
-        color: key.length == 2 ? 'white' : 'black',
-        note: key.substr(0, key.length-1),
-        octave: key.substr(-1),
-        k: id,
-        box: null,
-      });
-
-      if ((key.length==3)&&((key.substr(0, 2)=='Cb')||(key.substr(0, 2)=='Fb'))){
-  //      console.log("skip " + key);
-      }else{
-        this.floor.push({
-          color: key.length == 2 ? 'white' : 'black',
+      for (let key of keys) {
+        id++;
+        this.piano.push({
           note: key.substr(0, key.length-1),
           octave: key.substr(-1),
           k: id,
-          l: Math.round(Math.random()*width),
-          t: Math.round(Math.random()*height),
+          box: null,
         });
+
+        if ((key.length==3)&&((key.substr(0, 2)=='Cb')||(key.substr(0, 2)=='Fb'))){
+          //console.log("skip " + key);
+        }else{
+          this.floor.push({
+            note: key.substr(0, key.length-1),
+            octave: key.substr(-1),
+            k: id,
+            l: Math.round(Math.random()*width),
+            t: Math.round(Math.random()*height),
+          });
+        }
       }
     }
+    else{
+      this.msg = dt.msg;
+      this.floor = dt.floor;
+      this.piano = dt.piano;
+      this.keyboardName = dt.keyboardName;
+    }
   }
-};
 
-data.initGame();
+  save(){
+    writeFile('data.json', this).then(function(){
+      console.log("save success");
+    });
+  }
+}
+
+Data.load = function(){
+  readFile('data.json').then(function(dt){
+    data = new Data(dt);
+    console.log("load success");
+    emitChange();
+  });
+}
+
+var data = new Data("32 Keys");
 
 let observer = null;
-
 function emitChange() {
   observer(data);
 }
@@ -219,11 +144,14 @@ export function getAudioCtx() {
   return audioCtx;
 }
 
-export const keyboardList = Keyboard.list;
 export function restartGame(keyboardName){
-  data.initGame(keyboardName);
+  if (keyboardName) data = new Data(keyboardName);
+  else data = new Data(data.keyboardName);
   emitChange();
 }
 export function saveGame(){
   data.save();
+}
+export function loadGame(){
+  Data.load();
 }

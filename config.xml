@@ -24,10 +24,9 @@
         <allow-intent href="itms-apps:*" />
     </platform>
     <platform name="browser">
-      <preference name="ShowSplashScreen" value="false" /> <!-- defaults to "true" -->
+        <preference name="ShowSplashScreen" value="false" />
     </platform>
-
-    <hook type="before_prepare" src="scripts/appBeforePrepare.js" />
-    <hook type="after_prepare" src="scripts/appAfterPrepare.js" />
-
+    <hook src="scripts/appBeforePrepare.js" type="before_prepare" />
+    <hook src="scripts/appAfterPrepare.js" type="after_prepare" />
+    <plugin name="cordova-plugin-file" spec="https://github.com/apache/cordova-plugin-file.git" />
 </widget>
