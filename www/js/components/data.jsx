@@ -138,12 +138,6 @@ export function msg(txt) {
   data.msg = txt;
 }
 
-var audioCtx;
-export function getAudioCtx() {
-  if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-  return audioCtx;
-}
-
 export function restartGame(keyboardName){
   if (keyboardName) data = new Data(keyboardName);
   else data = new Data(data.keyboardName);

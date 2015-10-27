@@ -69,8 +69,19 @@ class App extends React.Component {
 
               <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul className="nav navbar-nav">
-                  <li className="active"><a href="#">Link1 <span className="sr-only">(current)</span></a></li>
-                  <li><a href="#">Link2</a></li>
+                  <li><a onClick={this.handleClick.bind(this, 'restart')}>Restart</a></li>
+                  <li><a onClick={this.handleClick.bind(this, 'save')}>Save</a></li>
+                  <li><a onClick={this.handleClick.bind(this, 'load')}>Load</a></li>
+                  <li className="dropdown">
+                    <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                      Keyboard<span className="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
+                    </a>
+                    <ul className="dropdown-menu">
+                      <li><a href="#">Keyboard</a></li>
+                      <li role="separator" className="divider"></li>
+                      {menuItems}
+                    </ul>
+                  </li>
                 </ul>
 
                 <ul className="nav navbar-nav navbar-right">
@@ -79,9 +90,6 @@ class App extends React.Component {
                       <span className="glyphicon glyphicon-cog" aria-hidden="true"></span>
                     </a>
                     <ul className="dropdown-menu">
-                      <li><a onClick={this.handleClick.bind(this, 'save')}>Save</a></li>
-                      <li><a onClick={this.handleClick.bind(this, 'load')}>Load</a></li>
-                      <li><a onClick={this.handleClick.bind(this, 'restart')}>Restart</a></li>
                       <li><a href="#">Keyboard</a></li>
                       <li role="separator" className="divider"></li>
                       {menuItems}

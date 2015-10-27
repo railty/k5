@@ -3,7 +3,8 @@ import '../../css/box.css'
 import React, { PropTypes } from 'react'
 import { DragSource } from 'react-dnd';
 import { getEmptyImage } from 'react-dnd-html5-backend';
-import { dropFloor, dropSlot, msg, getAudioCtx } from './data';
+import { dropFloor, dropSlot, msg } from './data';
+import { playTone } from './mp3';
 
 const boxSource = {
   beginDrag(props) {
@@ -38,37 +39,7 @@ class Box extends React.Component {
     onClick(){
       var data = this.props.data;
       var mp3 = data.note + data.octave + ".mp3";
-
-      var concertHallBuffer, soundSource;
-      var audioCtx = getAudioCtx();
-
-      var ajaxRequest = new XMLHttpRequest();
-
-      var url;
-      if (cordova.platformId == "browser"){
-        url = cordova.file.applicationDirectory + "browser/" + "www/media/" + mp3;
-      }
-      else{
-        url = cordova.file.applicationDirectory + "www/media/" + mp3;
-      }
-
-      ajaxRequest.open('GET', url, true);
-      ajaxRequest.responseType = 'arraybuffer';
-
-      ajaxRequest.onload = function() {
-        var audioData = ajaxRequest.response;
-        audioCtx.decodeAudioData(audioData, function(buffer) {
-            concertHallBuffer = buffer;
-            soundSource = audioCtx.createBufferSource();
-            soundSource.buffer = concertHallBuffer;
-
-            soundSource.connect(audioCtx.destination);
-            soundSource.start();
-          }, function(e){"Error with decoding audio data" + e.err}
-        );
-      }
-
-      ajaxRequest.send();
+      playTone(mp3);
     }
 
     render () {
