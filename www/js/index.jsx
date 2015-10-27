@@ -82,6 +82,7 @@ class App extends React.Component {
                       {menuItems}
                     </ul>
                   </li>
+                  <li className="navbar-text">{1+1}</li>
                 </ul>
 
                 <ul className="nav navbar-nav navbar-right">
@@ -92,7 +93,6 @@ class App extends React.Component {
                     <ul className="dropdown-menu">
                       <li><a href="#">Keyboard</a></li>
                       <li role="separator" className="divider"></li>
-                      {menuItems}
                     </ul>
                   </li>
                 </ul>
@@ -101,7 +101,6 @@ class App extends React.Component {
           </nav>
 
           {this.props.children}
-
 
           </div>
       )
