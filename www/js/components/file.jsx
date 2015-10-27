@@ -26,27 +26,32 @@ export function writeFile(fileName, data) {
     var str = JSON.stringify(data);
     var blob = new Blob([str], {type : 'text/plain'});
 
-    window.resolveLocalFileSystemURL("cdvfile://localhost/persistent/", function(dir) {
-      dir.getFile("data.json", { create: true }, function (file) {
-        file.createWriter(function(fileWriter) {
+    window.webkitRequestFileSystem(window.PERSISTENT, 10*1024*1024, function (fs) {
+      window.resolveLocalFileSystemURL("cdvfile://localhost/persistent/", function(dir) {
+        dir.getFile("data.json", { create: true }, function (file) {
+          file.createWriter(function(fileWriter) {
 
-          fileWriter.onwriteend = function(e) {
-            if (fileWriter.length === 0) {
-              console.log("truncate");
-              fileWriter.write(blob);
-            }
-            else{
-              console.log("write completed");
-              promise_resolve();
-            }
-          };
+            fileWriter.onwriteend = function(e) {
+              if (fileWriter.length === 0) {
+                console.log("truncate");
+                fileWriter.write(blob);
+              }
+              else{
+                console.log("write completed");
+                promise_resolve();
+              }
+            };
 
-          fileWriter.onerror = function(e) {
-            console.log('Write failed: ' + e.toString());
-          };
+            fileWriter.onerror = function(e) {
+              console.log('Write failed: ' + e.toString());
+            };
 
-          fileWriter.truncate(0);
+            fileWriter.truncate(0);
+          });
         });
+      }, function(e){
+        console.log("write file fail:");
+        console.log(e);
       });
     });
 
