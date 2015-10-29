@@ -7,6 +7,7 @@ var cordova = require('cordova');
 var rimraf = require('rimraf');
 var runSequence = require('run-sequence');
 var less = require('gulp-less');
+var shell = require('gulp-shell');
 
 var tasks = {
   webpack: function() {
@@ -29,7 +30,7 @@ gulp.task('livereload', function() {
 
 gulp.task('watch', ['serve'], function() {
   livereload.listen({port: 35729});
-  gulp.watch(['./www/js/**/*.jsx', './www/css/*.css'], ['livereload']);
+  gulp.watch(['./www/js/**/*.jsx', './www/css/*.css', './www/less/*.less'], ['livereload']);
 })
 
 gulp.task('build', function(cb) {
@@ -92,7 +93,12 @@ gulp.task('install', function(cb) {
 })
 
 //copy the bootstrap to local folder, compile bootstrap.less to css, which is not necessary but learned a lot
-gulp.task('bootstrap', function() {
+gulp.task('less', function() {
   //gulp.src('bower_components/bootstrap/dist/fonts/*').pipe(gulp.dest('www/fonts'));
-  gulp.src('www/less/bootstrap.less').pipe(less()).pipe(gulp.dest('bower_components/bootstrap/dist/css'));
+  gulp.src('www/less/dropdown.less').pipe(less()).pipe(gulp.dest('www/css'));
 });
+
+gulp.task('emulate', shell.task([
+  //'cordova run ios --target="iPad-2"',
+  'cordova run android --target="tablet"'
+]));

@@ -41,7 +41,6 @@ class Game extends React.Component {
 
         return (
             <div className="game" style={{ ...style }}>
-              <div className="top" onClick={this.onClick}>{msg + ':' + this.state.data.msg}</div>
               <Floor data={this.state.data.floor} />
               <Piano data={this.state.data.piano} />
               <CustomDragLayer />

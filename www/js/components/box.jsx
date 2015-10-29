@@ -15,6 +15,8 @@ const boxSource = {
     const box = monitor.getItem();
     const dropResult = monitor.getDropResult();
 
+    console.log("drop to " + dropResult.name);
+
     if (dropResult) {
       if (dropResult.name == 'floor') dropFloor(box.data, dropResult.dest);
       if (dropResult.name == 'slot') dropSlot(box.data, dropResult.slot);

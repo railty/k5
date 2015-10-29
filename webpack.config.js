@@ -5,7 +5,6 @@ module.exports = {
     index: './www/js/index.jsx',
     vendor: [
       'react',
-      'react-router',
       'alt',
       'alt-connect',
       'axios',
@@ -44,6 +43,9 @@ module.exports = {
     },{
       test: /\.woff($|\?)|\.woff2($|\?)|\.ttf($|\?)|\.eot($|\?)|\.svg($|\?)/,
       loader: 'url-loader'
+    },{
+      test: /\.less$/,
+      loader: "style!css!less"
     }
   ]}
 };
