@@ -26,8 +26,12 @@ export function writeFile(fileName, data) {
     var str = JSON.stringify(data);
     var blob = new Blob([str], {type : 'text/plain'});
 
-    window.webkitRequestFileSystem(window.PERSISTENT, 10*1024*1024, function (fs) {
-      window.resolveLocalFileSystemURL("cdvfile://localhost/persistent/", function(dir) {
+    //this is obviously a bug in cordova-plugin-file
+    //when platform is browser, and browser is chrome, it need special treatment. (using browser native function because chrome implement it, all other browser didn't)
+    var rfs = (cordova.platformId == "browser") ? window.webkitRequestFileSystem : window.requestFileSystem;
+
+    rfs(window.PERSISTENT, 10*1024*1024, function (fs) {
+      resolveLocalFileSystemURL("cdvfile://localhost/persistent/", function(dir) {
         dir.getFile("data.json", { create: true }, function (file) {
           file.createWriter(function(fileWriter) {
 
