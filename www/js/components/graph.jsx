@@ -1,5 +1,3 @@
-import '../../css/graph.css'
-
 import React, { PropTypes } from 'react'
 
 class Graph extends React.Component {

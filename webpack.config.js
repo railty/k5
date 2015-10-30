@@ -9,7 +9,10 @@ module.exports = {
       'alt-connect',
       'axios',
       'debug',
-      'bluebird'
+      'bluebird',
+      'react-dnd',
+      'react-dnd-touch-backend',
+      'react-dnd-html5-backend',
     ]
   },
   output: {

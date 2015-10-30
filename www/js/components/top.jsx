@@ -1,10 +1,7 @@
-import '../../less/top.less';
-
 import React from 'react';
 import { Button, Navbar, NavBrand, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
 import Keyboard from './keyboard';
-import { restartGame, saveGame, loadGame } from './data';
-
+import { restartGame, saveGame, loadGame, msg } from './data';
 
 export default class Top extends React.Component {
     constructor(props) {
@@ -26,16 +23,16 @@ export default class Top extends React.Component {
       console.log(menu);
       switch(menu) {
         case 'save':
-          //saveGame();
+          saveGame();
           break;
         case 'load':
-          //loadGame();
+          loadGame();
           break;
         case 'restart':
-          //restartGame();
+          restartGame();
           break;
         default:
-          //restartGame(menu);
+          restartGame(menu);
       }
     }
 
@@ -50,18 +47,21 @@ export default class Top extends React.Component {
       }
 
       return (
-        <Navbar>
-          <NavBrand>K5</NavBrand>
-          <Nav>
-            <NavItem onClick={this.handleClick.bind(this, 'restart')}>Restart</NavItem>
-            <NavItem onClick={this.handleClick.bind(this, 'save')}>Save</NavItem>
-            <NavItem onClick={this.handleClick.bind(this, 'load')}>Load</NavItem>
-            <NavDropdown title="Keyboards" id="basic-nav-dropdown">
-              {menuItems}
-            </NavDropdown>
-            <NavItem >Seconds: {this.state.time}</NavItem>
-          </Nav>
-        </Navbar>
+        <div className="top">
+          <Navbar>
+            <NavBrand>K5</NavBrand>
+            <Nav>
+              <NavItem onClick={this.handleClick.bind(this, 'restart')}>Restart</NavItem>
+              <NavItem onClick={this.handleClick.bind(this, 'save')}>Save</NavItem>
+              <NavItem onClick={this.handleClick.bind(this, 'load')}>Load</NavItem>
+              <NavDropdown title="Keyboards" id="basic-nav-dropdown">
+                {menuItems}
+              </NavDropdown>
+              <NavItem >Seconds: {this.state.time}</NavItem>
+              <NavItem >{this.state.time}</NavItem>
+            </Nav>
+          </Navbar>
+        </div>
       );
     }
 }

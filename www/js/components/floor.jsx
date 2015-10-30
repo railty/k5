@@ -1,14 +1,7 @@
-import '../../css/floor.css'
-
 import React, { PropTypes } from 'react'
 import { DropTarget } from 'react-dnd';
 
 import Box from './box'
-
-const style = {
-  display: 'flex',
-  flexWrap: 'wrap',
-};
 
 const floorTarget = {
   drop(props, monitor, component) {

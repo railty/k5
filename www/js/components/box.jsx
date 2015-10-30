@@ -1,5 +1,3 @@
-import '../../css/box.css'
-
 import React, { PropTypes } from 'react'
 import { DragSource } from 'react-dnd';
 import { getEmptyImage } from 'react-dnd-html5-backend';
@@ -15,9 +13,8 @@ const boxSource = {
     const box = monitor.getItem();
     const dropResult = monitor.getDropResult();
 
-    console.log("drop to " + dropResult.name);
-
     if (dropResult) {
+      console.log("drop to " + dropResult.name);
       if (dropResult.name == 'floor') dropFloor(box.data, dropResult.dest);
       if (dropResult.name == 'slot') dropSlot(box.data, dropResult.slot);
     }
@@ -47,28 +44,25 @@ class Box extends React.Component {
     render () {
       const { isDragging, connectDragSource, data: {l, t, note, octave, color}, slot, preview } = this.props;
       const style = {
-        cursor: 'move',
-        background: "darkgreen",
-        color: "black",
         left: l,
         top: t,
       };
-      const opacity = isDragging ? 0.4 : 1;
-      msg(isDragging);
+      const opacity = isDragging ? 0.5 : 1;
 
       if (preview){
         return (
-          <div className="box" style={{ ...style, opacity }}>
-            *
-          </div>
+          <div className="box" style={{ ...style, opacity }} />
         );
       }else{
-        if (!slot) style.position = 'absolute';
+        if (slot) {
+          style.width = "100%";
+        }
+        else{
+          style.position = 'absolute';
+        }
         return (
           connectDragSource(
-            <div className="box" style={{ ...style, opacity }} onClick={this.onClick.bind(this)}>
-              *
-            </div>
+            <div className="box" style={{ ...style, opacity }} onClick={this.onClick.bind(this)} />
           )
         );
       }

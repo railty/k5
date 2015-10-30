@@ -1,10 +1,5 @@
-import '../../css/piano.css'
-
 import React, { PropTypes } from 'react'
 import Slot from './slot'
-
-const style = {
-};
 
 class Piano extends React.Component {
     render () {
@@ -22,9 +17,9 @@ class Piano extends React.Component {
         }
       }
       return (
-          <div className="piano" style={{ ...style }}>
-            <div className="blacks">{blacks}</div>
+          <div className="piano">
             <div className="whites">{whites}</div>
+            <div className="blacks">{blacks}</div>
           </div>
       )
     }

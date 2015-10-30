@@ -1,4 +1,4 @@
-import '../css/index.css';
+import '../less/index.less';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -21,14 +21,14 @@ window.onerror = (msg, url, line, column, e) => {
 }
 
 class App extends React.Component {
-    render() {
-      return (
-        <div>
-          <Top />
-          <Game />
-        </div>
-      );
-    }
+  render() {
+    return (
+      <div>
+        <Top />
+        <Game />
+      </div>
+    );
+  }
 }
 
 try {

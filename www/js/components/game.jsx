@@ -1,10 +1,8 @@
-import '../../css/game.css'
-
 import React, { PropTypes } from 'react'
-import { DragDropContext } from 'react-dnd';
 
 import HTML5Backend from 'react-dnd-html5-backend';
 import { default as TouchBackend } from 'react-dnd-touch-backend';
+import { DragDropContext } from 'react-dnd';
 
 var backEnd = (cordova.platformId == "browser") ? HTML5Backend : TouchBackend;
 
@@ -36,7 +34,8 @@ class Game extends React.Component {
     render () {
         var msg = bSuccess() ? 'Success' : 'Running';
         const style = {
-          height: window.innerHeight-100,
+          //default bootstrap nav height is 50px
+          height: window.innerHeight-50,
         };
 
         return (
@@ -47,6 +46,7 @@ class Game extends React.Component {
             </div>
         )
     }
+
 }
 
 //export default DragDropContext(HTML5Backend)(App);

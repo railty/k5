@@ -1,12 +1,7 @@
-import '../../css/slot.css'
-
 import React, { PropTypes } from 'react'
 import { DropTarget } from 'react-dnd';
 
 import Box from './box'
-
-const style = {
-};
 
 const slotTarget = {
   drop(props, monitor, component) {
@@ -23,44 +18,40 @@ function collect(connect, monitor) {
 }
 
 class Slot extends React.Component {
-    constructor(props) {
-      super(props);
+  constructor(props) {
+    super(props);
+  }
+
+  render () {
+    const { connectDropTarget, canDrop, isOver, data: {k, note, box, octave} } = this.props;
+    const isActive = canDrop && isOver;
+
+    var className = note.length==1 ? 'white' : 'black';
+
+    let backgroundColor;
+    if (isActive) {
+      backgroundColor = 'lightgreen';
+    }
+    else{
+      backgroundColor = className=='white' ? 'lightgrey' : 'black';
     }
 
-    static propTypes = {
-      isOver: PropTypes.bool.isRequired,
-    };
+    let c = note=='C' ? 'C' : "";
 
-    render () {
-      const { connectDropTarget, canDrop, isOver, data: {k, note, box, octave} } = this.props;
-      const isActive = canDrop && isOver;
-
-      var color = note.length==1 ? 'white' : 'black';
-
-      let backgroundColor;
-      if (isActive) {
-        backgroundColor = 'lightgreen';
-      }
-      else{
-        backgroundColor = color=='white' ? 'lightgrey' : 'black';
-      }
-
-      let c = note=='C' ? 'C' : "";
-
-      if (box){
-        return connectDropTarget(
-            <div className={color} style={{ ...style, backgroundColor }}>
-              <Box data={box} slot />
-            </div>
-        );
-      }else{
-        return connectDropTarget(
-            <div className={color} style={{ ...style, backgroundColor }}>
-              {c}
-            </div>
-        );
-      }
+    if (box){
+      return connectDropTarget(
+        <div className={className} style={{ backgroundColor }}>
+          <Box data={box} slot={className} />
+        </div>
+      );
+    }else{
+      return connectDropTarget(
+        <div className={className} style={{ backgroundColor }}>
+          {c}
+        </div>
+      );
     }
+  }
 }
 
 export default DropTarget("box", slotTarget, collect)(Slot);

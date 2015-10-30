@@ -135,7 +135,10 @@ export function bSuccess() {
 }
 
 export function msg(txt) {
-  data.msg = txt;
+  if (txt){
+    data.msg = txt;
+  }
+  return data.msg;
 }
 
 export function restartGame(keyboardName){
