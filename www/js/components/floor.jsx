@@ -5,7 +5,12 @@ import Box from './box'
 
 const floorTarget = {
   drop(props, monitor, component) {
-    return {name: 'floor', dest: monitor.getSourceClientOffset()};
+    var xy = monitor.getSourceClientOffset();
+    xy.y = xy.y - 50;
+    return {
+      name: 'floor',
+      dest: xy
+    };
   }
 };
 

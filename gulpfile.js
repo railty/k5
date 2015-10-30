@@ -102,3 +102,8 @@ gulp.task('emulate', shell.task([
   //'cordova run ios --target="iPad-2"',
   'cordova run android --target="tablet"'
 ]));
+
+gulp.task('plugin', shell.task([
+  'cordova plugin remove cordova-plugin-file',
+  'cordova plugin add https://github.com/apache/cordova-plugin-file.git'
+]));
