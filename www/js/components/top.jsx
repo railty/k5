@@ -20,7 +20,7 @@ export default class Top extends React.Component {
     }
 
     handleClick(menu, event) {
-      console.log(menu);
+      msg(menu);
       switch(menu) {
         case 'save':
           saveGame();
@@ -58,7 +58,7 @@ export default class Top extends React.Component {
                 {menuItems}
               </NavDropdown>
               <NavItem >Seconds: {this.state.time}</NavItem>
-              <NavItem >{this.state.time}</NavItem>
+              <NavItem >{msg}</NavItem>
             </Nav>
           </Navbar>
         </div>

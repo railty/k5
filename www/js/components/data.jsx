@@ -49,6 +49,9 @@ class Data{
       console.log("save success");
     });
   }
+  pianoView(idx){
+    return this.piano.slice((idx-1)*20, idx*20);
+  }
 }
 
 Data.load = function(){
@@ -142,8 +145,10 @@ export function msg(txt) {
 }
 
 export function restartGame(keyboardName){
+  debugger;
   if (keyboardName) data = new Data(keyboardName);
   else data = new Data(data.keyboardName);
+  msg("game restarted");
   emitChange();
 }
 export function saveGame(){

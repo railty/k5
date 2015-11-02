@@ -1,5 +1,4 @@
 import React, { PropTypes } from 'react'
-
 import HTML5Backend from 'react-dnd-html5-backend';
 import { default as TouchBackend } from 'react-dnd-touch-backend';
 import { DragDropContext } from 'react-dnd';
@@ -7,7 +6,7 @@ import { DragDropContext } from 'react-dnd';
 var backEnd = (cordova.platformId == "browser") ? HTML5Backend : TouchBackend;
 
 import Floor from './floor'
-import Piano from './piano'
+import PianoView from './pianoView'
 import CustomDragLayer from './customDragLayer';
 import { observe, bSuccess } from './data';
 
@@ -25,12 +24,15 @@ class Game extends React.Component {
          this.state = nextState;
        }
     }
+
     componentWillUnmount() {
       this.unobserve();
     }
+
     onClick(){
       console.log('aaa');
     }
+
     render () {
         var msg = bSuccess() ? 'Success' : 'Running';
         const style = {
@@ -41,7 +43,7 @@ class Game extends React.Component {
         return (
             <div className="game" style={{ ...style }}>
               <Floor data={this.state.data.floor} />
-              <Piano data={this.state.data.piano} />
+              <PianoView data={this.state.data.piano} />
               <CustomDragLayer />
             </div>
         )
@@ -49,6 +51,4 @@ class Game extends React.Component {
 
 }
 
-//export default DragDropContext(HTML5Backend)(App);
-//export default DragDropContext(TouchBackend)(App);
 export default DragDropContext(backEnd)(Game);

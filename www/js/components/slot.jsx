@@ -27,7 +27,6 @@ class Slot extends React.Component {
     const isActive = canDrop && isOver;
 
     var className = note.length==1 ? 'white' : 'black';
-
     let backgroundColor;
     if (isActive) {
       backgroundColor = 'lightgreen';
@@ -35,18 +34,24 @@ class Slot extends React.Component {
     else{
       backgroundColor = className=='white' ? 'lightgrey' : 'black';
     }
+    let disable = (note=='Fb')||(note=='Cb');
+    let opacity = 1;
+    if (disable) {
+      backgroundColor = 'lightgrey';
+      opacity = 0;
+    }
 
-    let c = note=='C' ? 'C' : "";
-
+    //let c = note=='C' ? 'C' : "";
+    let c = note + octave;
     if (box){
       return connectDropTarget(
-        <div className={className} style={{ backgroundColor }}>
+        <div className={className} style={{ backgroundColor, opacity }}>
           <Box data={box} slot={className} />
         </div>
       );
     }else{
       return connectDropTarget(
-        <div className={className} style={{ backgroundColor }}>
+        <div className={className} style={{ backgroundColor, opacity }}>
           {c}
         </div>
       );

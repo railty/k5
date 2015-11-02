@@ -2,6 +2,7 @@ import '../less/index.less';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
+
 import Game from './components/game';
 import Graph from './components/graph';
 import Top from './components/top';
@@ -21,6 +22,10 @@ window.onerror = (msg, url, line, column, e) => {
 }
 
 class App extends React.Component {
+  constructor(props) {
+     super(props);
+  }
+
   render() {
     return (
       <div>

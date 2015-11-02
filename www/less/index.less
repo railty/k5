@@ -1,4 +1,6 @@
 @import "../../bower_components/bootstrap/less/bootstrap.less";
+@grid-float-breakpoint: @screen-xs-min;
+
 @white-height: 200px;
 @white-width: 40px;
 @black-height: 140px;
@@ -96,4 +98,19 @@
   background: lightgreen;
   color: black;
   cursor: move;
+}
+
+.swipe {
+  overflow: hidden;
+  visibility: hidden;
+  position: relative;
+}
+.swipe-wrap {
+  overflow: hidden;
+  position: relative;
+}
+.swipe-wrap > div {
+  float:left;
+  width:100%;
+  position: relative;
 }

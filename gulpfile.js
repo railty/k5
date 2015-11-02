@@ -8,6 +8,7 @@ var rimraf = require('rimraf');
 var runSequence = require('run-sequence');
 var less = require('gulp-less');
 var shell = require('gulp-shell');
+var run = require('gulp-run');
 
 var tasks = {
   webpack: function() {
@@ -96,6 +97,21 @@ gulp.task('install', function(cb) {
 gulp.task('less', function() {
   //gulp.src('bower_components/bootstrap/dist/fonts/*').pipe(gulp.dest('www/fonts'));
   gulp.src('www/less/dropdown.less').pipe(less()).pipe(gulp.dest('www/css'));
+});
+
+gulp.task('deploy', function(){
+  var argv = require('yargs').argv;
+  var cmd;
+  if (argv.target == 'android'){
+    cmd = 'cordova run android --device';
+  }else if (argv.target == 'android-emulator'){
+    cmd = 'cordova run android --target="tab"';
+  }else{
+    console.log("'gulp deploy --target='android'|'android-emulator'");
+    return;
+  }
+  console.log(cmd);
+  run(cmd).exec();
 });
 
 gulp.task('emulate', shell.task([
