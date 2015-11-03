@@ -9,28 +9,25 @@ import Floor from './floor'
 import PianoView from './pianoView'
 import CustomDragLayer from './customDragLayer';
 import { observe, bSuccess } from './data';
+import DataStore from './dataStore';
+import DataActions from './dataActions';
 
 class Game extends React.Component {
     constructor(props) {
        super(props);
-       this.unobserve = observe(this.handleChange.bind(this));
+       this.state = DataStore.getState();
     }
 
-    handleChange(data) {
-       const nextState = { data };
-       if (this.state) {
-         this.setState(nextState);
-       } else {
-         this.state = nextState;
-       }
+    componentDidMount() {
+      DataStore.listen(this.onChange.bind(this));
     }
 
     componentWillUnmount() {
-      this.unobserve();
+      DataStore.unlisten(this.onChange);
     }
 
-    onClick(){
-      console.log('aaa');
+    onChange(state) {
+      this.setState(state);
     }
 
     render () {
@@ -42,13 +39,12 @@ class Game extends React.Component {
 
         return (
             <div className="game" style={{ ...style }}>
-              <Floor data={this.state.data.floor} />
-              <PianoView data={this.state.data.piano} />
+              <Floor data={this.state.floor} />
+              <PianoView data={this.state.piano} />
               <CustomDragLayer />
             </div>
         )
     }
-
 }
 
 export default DragDropContext(backEnd)(Game);

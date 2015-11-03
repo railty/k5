@@ -3,6 +3,7 @@ import { DragSource } from 'react-dnd';
 import { getEmptyImage } from 'react-dnd-html5-backend';
 import { dropFloor, dropSlot, msg } from './data';
 import { playTone } from './mp3';
+import DataActions from './dataActions';
 
 const boxSource = {
   beginDrag(props) {
@@ -15,8 +16,8 @@ const boxSource = {
 
     if (dropResult) {
       console.log("drop to " + dropResult.name);
-      if (dropResult.name == 'floor') dropFloor(box.data, dropResult.dest);
-      if (dropResult.name == 'slot') dropSlot(box.data, dropResult.slot);
+      if (dropResult.name == 'floor') DataActions.dropFloor({box: box.data, dest: dropResult.dest});
+      if (dropResult.name == 'slot') DataActions.dropSlot({box: box.data, slot:dropResult.slot});
     }
   }
 };

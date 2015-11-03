@@ -1,38 +1,45 @@
 import React from 'react';
 import { Button, Navbar, NavBrand, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
 import Keyboard from './keyboard';
-import { restartGame, saveGame, loadGame, msg } from './data';
+import { restartGame, saveGame, loadGame } from './data';
+import DataStore from './dataStore';
+import DataActions from './dataActions';
 
 export default class Top extends React.Component {
     constructor(props) {
        super(props);
-       this.state = {time: 1};
+       this.state = DataStore.getState();
     }
 
     componentDidMount() {
+      DataStore.listen(this.onChange.bind(this));
       this.timer = setInterval(function(){
-        this.setState({time: this.state.time + 1});
+        DataActions.tick();
       }.bind(this), 1000);
     }
 
     componentWillUnmount() {
       clearInterval(this.timer);
+      DataStore.unlisten(this.onChange);
+    }
+
+    onChange(state) {
+      this.setState(state);
     }
 
     handleClick(menu, event) {
-      msg(menu);
       switch(menu) {
         case 'save':
-          saveGame();
+          DataActions.saveGame();
           break;
         case 'load':
-          loadGame();
+          DataActions.loadGame();
           break;
         case 'restart':
-          restartGame();
+          DataActions.restartGame();
           break;
         default:
-          restartGame(menu);
+          DataActions.restartGame(menu);
       }
     }
 
@@ -58,7 +65,7 @@ export default class Top extends React.Component {
                 {menuItems}
               </NavDropdown>
               <NavItem >Seconds: {this.state.time}</NavItem>
-              <NavItem >{msg}</NavItem>
+              <NavItem >{this.state.message}</NavItem>
             </Nav>
           </Navbar>
         </div>
