@@ -9,12 +9,15 @@ export default class Top extends React.Component {
     constructor(props) {
        super(props);
        this.state = DataStore.getState();
+       this.state.time = 0;
     }
 
     componentDidMount() {
       DataStore.listen(this.onChange.bind(this));
       this.timer = setInterval(function(){
-        DataActions.tick();
+        var st = this.state;
+        st.time++
+        this.setState(st);
       }.bind(this), 1000);
     }
 

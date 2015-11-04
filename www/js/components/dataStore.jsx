@@ -10,7 +10,6 @@ class DataStore {
     this.message = "Ready!";
 
     this.bindListeners({
-      tick: DataActions.tick,
       restartGame: DataActions.restartGame,
       dropFloor: DataActions.dropFloor,
       dropSlot: DataActions.dropSlot,
@@ -22,10 +21,6 @@ class DataStore {
       getLocation: this.getLocation
     });
 */
-  }
-
-  tick() {
-    this.time ++;
   }
 
   restartGame(keyboardName){
@@ -59,7 +54,6 @@ class DataStore {
         });
       }
     }
-    this.time = 0;
     this.message = "Game restarted!";
   }
 
@@ -121,7 +115,6 @@ class DataStore {
     readFile('data.json').then(function(dt){
       this.floor = dt.floor;
       this.piano = dt.piano;
-      this.time = dt.time;
       this.message = "Load success!";
     }.bind(this));
   }

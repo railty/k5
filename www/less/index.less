@@ -100,10 +100,51 @@
   cursor: move;
 }
 
+.bottom-container{
+    display: flex;
+    flex-direction: column;
+}
+.indicator{
+  display: flex;
+  flex-direction: row;
+  height: 15px;
+  width: 100%;
+}
+.indicator-left{
+  width: 30%;
+}
+.indicator-middle{
+  width: 40%;
+  background: pink;
+}
+.indicator-right{
+}
+.bottom{
+    display: flex;
+    flex-direction: row;
+}
+.prev{
+    width:100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2em;
+}
+.next{
+    width:100px;
+    margin-left: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2em;
+}
+
 .swipe {
   overflow: hidden;
   visibility: hidden;
   position: relative;
+
+  flex-grow:1;
 }
 .swipe-wrap {
   overflow: hidden;

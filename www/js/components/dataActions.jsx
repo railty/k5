@@ -1,10 +1,6 @@
 import alt from '../alt';
 
 class DataActions{
-  tick(){
-    this.dispatch();
-  }
-
   restartGame(keyboardName){
     this.dispatch(keyboardName);
   }
