@@ -28,12 +28,13 @@ class DataStore {
     this.floor = [];
     this.piano = [];
 
-    var keys = new Keyboard(this.keyboardName);
+    var keyboard = new Keyboard(this.keyboardName);
     var id = 0;
     var height = window.innerHeight - 350;
     var width = window.innerWidth - 50;
+    this.message = this.keyboardName + ":" + keyboard.keys() + ":" + keyboard.whites()*40;
 
-    for (let key of keys) {
+    for (let key of keyboard) {
       id++;
       this.piano.push({
         note: key.substr(0, key.length-1),
@@ -54,7 +55,7 @@ class DataStore {
         });
       }
     }
-    this.message = "Game restarted!";
+    //this.message = "Game restarted!";
   }
 
   dropFloor(dt) {

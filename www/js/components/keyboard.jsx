@@ -40,6 +40,22 @@ class Keyboard{
     var i = new Iterator(this);
     return i;
   }
+
+  keys(){
+    var n = 0;
+    for (let key of this){
+      if (!((key.length==3) && ((key.substr(0, 2)=='Cb') || (key.substr(0, 2)=='Fb')))) n++;
+    }
+    return n;
+  }
+
+  whites(){
+    var n = 0;
+    for (let key of this){
+      if (key.length==2) n++;
+    }
+    return n;
+  }
 }
 
 Keyboard.list = [{

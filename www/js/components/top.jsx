@@ -16,7 +16,7 @@ export default class Top extends React.Component {
       DataStore.listen(this.onChange.bind(this));
       this.timer = setInterval(function(){
         var st = this.state;
-        st.time++
+        st.time++;
         this.setState(st);
       }.bind(this), 1000);
     }
