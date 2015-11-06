@@ -1,7 +1,6 @@
 import React, { PropTypes } from 'react'
 import { DragSource } from 'react-dnd';
 import { getEmptyImage } from 'react-dnd-html5-backend';
-import { dropFloor, dropSlot, msg } from './data';
 import { playTone } from './mp3';
 import DataActions from './dataActions';
 

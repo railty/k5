@@ -1,7 +1,6 @@
 import React from 'react';
 import { Button, Navbar, NavBrand, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
 import Keyboard from './keyboard';
-import { restartGame, saveGame, loadGame } from './data';
 import DataStore from './dataStore';
 import DataActions from './dataActions';
 

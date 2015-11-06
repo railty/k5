@@ -41,20 +41,78 @@ class Keyboard{
     return i;
   }
 
-  keys(){
-    var n = 0;
+  slots(){
+    var ks = [];
     for (let key of this){
-      if (!((key.length==3) && ((key.substr(0, 2)=='Cb') || (key.substr(0, 2)=='Fb')))) n++;
+      ks.push(key);
     }
-    return n;
+    return ks;
+  }
+
+  keys(){
+    return this.slots().filter( (slot) => {
+      return (!((slot.length==3)&&((slot.substr(0, 2)=='Cb')||(slot.substr(0, 2)=='Fb'))));
+    });
   }
 
   whites(){
-    var n = 0;
-    for (let key of this){
-      if (key.length==2) n++;
-    }
-    return n;
+    return this.keys().filter((key)=>{
+      return (key.length==2);
+    });
+  }
+
+  blacks(){
+    return this.keys().filter((key)=>{
+      return (key.length==3);
+    });
+  }
+
+  middleC(){
+    var cs = this.whites().filter((k) => {
+      return (k[0]=='C');
+    });
+    var mc = cs[Math.floor(cs.length / 2)];
+    return mc;
+  }
+
+  leftSection(sec, n){
+    var slots = this.slots();
+    var last = slots.indexOf(sec[0]);
+    var section = slots.slice(last-n >= 0 ? last - n : 0, last);
+    return section;
+  }
+
+  rightSection(sec, n){
+    var slots = this.slots();
+    var last = slots.indexOf(sec[sec.length-1]);
+    var section = slots.slice(last + 1, last + n + 1);
+    return section;
+  }
+
+  sections(n){
+    var slots = this.slots();
+    var mc = slots.indexOf(this.middleC());
+    var i = Math.floor(n/2);
+
+    var sections = [];
+    var mSection = slots.slice(mc-i>=0 ? mc-i : 0, mc+i);
+
+    var section = mSection;
+    sections.push(section);
+    do {
+      section = this.leftSection(section, n);
+      if (section.length>0) sections.push(section);
+    } while (section.length == n);
+
+    sections.reverse();
+
+    var section = mSection;
+    do {
+      section = this.rightSection(section, n);
+      if (section.length>0) sections.push(section);
+    } while (section.length == n);
+
+    return sections;
   }
 }
 

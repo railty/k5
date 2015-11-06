@@ -6,7 +6,7 @@ import DataActions from './dataActions';
 
 class DataStore {
   constructor() {
-    this.restartGame("32 Keys");
+    this.restartGame("76 Keys");
     this.message = "Ready!";
 
     this.bindListeners({
@@ -24,37 +24,35 @@ class DataStore {
   }
 
   restartGame(keyboardName){
+    console.log("restart game");
     if (keyboardName) this.keyboardName = keyboardName;
-    this.floor = [];
-    this.piano = [];
 
     var keyboard = new Keyboard(this.keyboardName);
     var id = 0;
     var height = window.innerHeight - 350;
     var width = window.innerWidth - 50;
-    this.message = this.keyboardName + ":" + keyboard.keys() + ":" + keyboard.whites()*40;
+    this.message = this.keyboardName + ":" + keyboard.keys().length + ":" + keyboard.whites().length*40;
 
-    for (let key of keyboard) {
-      id++;
-      this.piano.push({
-        note: key.substr(0, key.length-1),
-        octave: key.substr(-1),
-        k: id,
+    var keyWidth = 40;
+    var keysPerSection = Math.floor(width/keyWidth);
+
+    var sections = keyboard.sections(keysPerSection);
+    this.piano = sections.map((section)=>{
+      return section.map((key)=>{
+        return {note:key, box:null}
+      });
+    });
+
+    this.floor = [];
+    keyboard.keys().forEach((key)=>{
+      this.floor.push({
+        note: key,
+        l: Math.round(Math.random()*width),
+        t: Math.round(Math.random()*height),
         box: null,
       });
+    });
 
-      if ((key.length==3)&&((key.substr(0, 2)=='Cb')||(key.substr(0, 2)=='Fb'))){
-        //console.log("skip " + key);
-      }else{
-        this.floor.push({
-          note: key.substr(0, key.length-1),
-          octave: key.substr(-1),
-          k: id,
-          l: Math.round(Math.random()*width),
-          t: Math.round(Math.random()*height),
-        });
-      }
-    }
     //this.message = "Game restarted!";
   }
 

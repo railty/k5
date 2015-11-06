@@ -4,15 +4,16 @@ import Slot from './slot'
 class Piano extends React.Component {
     render () {
       var blacks=[], whites=[];
+      var i=0;
       for(var item of this.props.data){
-        if (item.note.length==1){
+        if (item.note.length==2){
           whites.push((
-            <Slot key={item.k} data={item} />
+            <Slot key={++i} data={item} />
           ));
         }
         else{
           blacks.push((
-            <Slot key={item.k} data={item} />
+            <Slot key={++i} data={item} />
           ));
         }
       }

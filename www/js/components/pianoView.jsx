@@ -13,7 +13,8 @@ class PianoView extends React.Component {
     componentDidMount() {
       var bottom = ReactDOM.findDOMNode(this);
       var swipe = bottom.getElementsByClassName("swipe")[0];
-      this.swipe = Swipe(swipe, { continuous: false });
+      var total = this.props.data.length;
+      this.swipe = Swipe(swipe, {continuous: false, startSlide: Math.floor(total/2)});
     }
 
     next(){
@@ -27,9 +28,17 @@ class PianoView extends React.Component {
     }
 
     render () {
-      var totalPage = 3;
-      var wLeft = Math.round(100*this.state.page/totalPage) + "%";
-      var wMiddle = Math.round(100*1/totalPage) + "%";
+      var total = this.props.data.length;
+      var wLeft = Math.round(100*this.state.page/total) + "%";
+      var wMiddle = Math.round(100*1/total) + "%";
+
+      var slideViews = this.props.data.map((section, i)=>{
+         return(
+           <div key={i}>
+             <Piano data={section} />
+           </div>
+         );
+      });
 
       return (
         <div className="bottom-container">
@@ -42,9 +51,7 @@ class PianoView extends React.Component {
             <div className="prev glyphicon glyphicon-chevron-left" onClick={this.prev.bind(this)}></div>
             <div id='slider' className='swipe'>
               <div className='swipe-wrap'>
-                <div><Piano data={this.props.data.slice(0, 40)} /></div>
-                <div><Piano data={this.props.data.slice(40, 80)} /></div>
-                <div><Piano data={this.props.data.slice(80, 120)} /></div>
+                {slideViews}
               </div>
             </div>
             <div className="next glyphicon glyphicon-chevron-right" onClick={this.next.bind(this)}></div>
