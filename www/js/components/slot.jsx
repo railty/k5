@@ -40,7 +40,7 @@ class Slot extends React.Component {
       backgroundColor = 'lightgrey';
       opacity = 0;
     }
-
+    var text = className=="white" ? note : '';
     if (box){
       return connectDropTarget(
         <div className={className} style={{ backgroundColor, opacity }}>
@@ -50,7 +50,7 @@ class Slot extends React.Component {
     }else{
       return connectDropTarget(
         <div className={className} style={{ backgroundColor, opacity }}>
-          {note}
+          {text}
         </div>
       );
     }

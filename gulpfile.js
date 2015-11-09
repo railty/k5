@@ -106,18 +106,19 @@ gulp.task('deploy', function(){
     cmd = 'cordova run android --device';
   }else if (argv.target == 'android-emulator'){
     cmd = 'cordova run android --target="tab"';
+  }else if (argv.target == 'ios'){
+    cmd = 'cordova run ios --device"';
+  }else if (argv.target == 'ios-emulator'){
+    cmd = 'cordova run ios --target="iPad-2"';
+  }else if (argv.target == 'windows'){
+    cmd = 'cordova run windows --appx=uap'
   }else{
-    console.log("'gulp deploy --target='android'|'android-emulator'");
+    console.log("'gulp deploy --target=android | android-emulator | ios | ios-emulator | windows");
     return;
   }
   console.log(cmd);
   run(cmd).exec();
 });
-
-gulp.task('emulate', shell.task([
-  //'cordova run ios --target="iPad-2"',
-  'cordova run android --target="tablet"'
-]));
 
 gulp.task('plugin', shell.task([
   'cordova plugin remove cordova-plugin-file',

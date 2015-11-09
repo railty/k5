@@ -6,7 +6,7 @@ import DataActions from './dataActions';
 
 class DataStore {
   constructor() {
-    this.restartGame("76 Keys");
+    this.restartGame("32 Keys");
     this.message = "Ready!";
 
     this.bindListeners({
@@ -17,35 +17,15 @@ class DataStore {
       saveGame: DataActions.saveGame,
       loadGame: DataActions.loadGame,
     });
-
-    this.exportPublicMethods({
-      setSwipe: this.setSwipe,
-      getSwipe: this.getSwipe,
-    });
   }
 
-  setSwipe(swipe){
-    this.state.swipe = swipe;
-  }
-
-  getSwipe(){
-    return this.state.swipe;
-  }
-
-  killSwipe(){
-    if (this.swipe){
-      console.log("kill swipe");
-      this.swipe.kill();
-      delete this.swipe;
-    }
-  }
   restartGame(keyboardName){
     console.log("restart game");
     this.restarting = true;
     setTimeout(function(){
       if (keyboardName) this.keyboardName = keyboardName;
       DataActions.restartGameFinished(keyboardName);
-    }.bind(this), 1000);
+    }.bind(this), 100);
   }
 
   restartGameFinished(keyboardName){
@@ -79,7 +59,6 @@ class DataStore {
         box: null,
       });
     });
-    this.killSwipe();
     //this.message = "Game restarted!";
   }
 

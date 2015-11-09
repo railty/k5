@@ -12,6 +12,9 @@ function dlMp3(fileName){
   if (cordova.platformId == "browser"){
     url = cordova.file.applicationDirectory + "browser/" + "www/media/" + fileName;
   }
+  else if (cordova.platformId == "windows"){
+    url = "ms-appx-web://com.example.k5/" + "www/media/" + fileName;
+  }
   else{
     url = cordova.file.applicationDirectory + "www/media/" + fileName;
   }

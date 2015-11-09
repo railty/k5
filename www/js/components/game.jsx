@@ -3,12 +3,11 @@ import HTML5Backend from 'react-dnd-html5-backend';
 import { default as TouchBackend } from 'react-dnd-touch-backend';
 import { DragDropContext } from 'react-dnd';
 
-var backEnd = (cordova.platformId == "browser") ? HTML5Backend : TouchBackend;
+var backEnd = (cordova.platformId == "browser" || cordova.platformId == "windows") ? HTML5Backend : TouchBackend;
 
 import Floor from './floor'
 import PianoView from './pianoView'
 import CustomDragLayer from './customDragLayer';
-import { observe, bSuccess } from './data';
 import DataStore from './dataStore';
 import DataActions from './dataActions';
 
@@ -31,15 +30,15 @@ class Game extends React.Component {
     }
 
     render () {
-        var msg = bSuccess() ? 'Success' : 'Running';
+        //var msg = bSuccess() ? 'Success' : 'Running';
         const style = {
           //default bootstrap nav height is 50px
           height: window.innerHeight-50,
         };
 
         if (this.state.restarting) return (
-            <div>
-              reloading
+            <div className="text-screen">
+              Reloading
             </div>
         )
         else return (

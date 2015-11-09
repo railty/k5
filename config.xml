@@ -28,6 +28,10 @@
     <platform name="browser">
         <preference name="ShowSplashScreen" value="false" />
     </platform>
+    <platform name="windows">
+      <preference name="ShowSplashScreen" value="false" />
+      <preference name="windows-target-version" value="10.0" />
+    </platform>
     <hook src="scripts/appBeforePrepare.js" type="before_prepare" />
     <hook src="scripts/appAfterPrepare.js" type="after_prepare" />
     <plugin name="cordova-plugin-file" spec="https://github.com/apache/cordova-plugin-file.git" />

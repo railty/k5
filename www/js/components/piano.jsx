@@ -20,6 +20,7 @@ class Piano extends React.Component {
       var transform="translate(0, -200px)";
       if (this.props.data[0].note.length==3) transform="translate(-20px, -200px)";
 
+      if (cordova.platformId=="windows") transform="translate(0px, -30px)";
       return (
           <div className="piano">
             <div className="whites">{whites}</div>

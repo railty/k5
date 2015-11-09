@@ -56,15 +56,23 @@ class Box extends React.Component {
       }else{
         if (slot) {
           style.width = "100%";
+          return (
+            connectDragSource(
+              <div className="box" style={{ ...style, opacity }} onClick={this.onClick.bind(this)} >
+              </div>
+            )
+          );
         }
         else{
           style.position = 'absolute';
+          return (
+            connectDragSource(
+              <div className="box" style={{ ...style, opacity }} onClick={this.onClick.bind(this)} >
+                <div className="glyphicon glyphicon-music"></div>
+              </div>
+            )
+          );
         }
-        return (
-          connectDragSource(
-            <div className="box" style={{ ...style, opacity }} onClick={this.onClick.bind(this)} />
-          )
-        );
       }
     }
 }

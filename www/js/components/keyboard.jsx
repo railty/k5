@@ -1,4 +1,4 @@
-class Iterator{
+class NotesIterator{
   constructor(keyboard) {
      this.keyboard = keyboard;
      this.note = this.keyboard.firstNote;
@@ -26,18 +26,14 @@ class Iterator{
   }
 }
 
-class Keyboard{
-  constructor(name) {
-    var keyboard = Keyboard.list.find(function(k){
-      return k.name == name;
-    });
-    this.name = keyboard.name;
-    this.firstNote = keyboard.firstNote;
-    this.lastNote = keyboard.lastNote;
+class Notes{
+  constructor(firstNote, lastNote) {
+    this.firstNote = firstNote;
+    this.lastNote = lastNote;
   }
 
   [Symbol.iterator]() {
-    var i = new Iterator(this);
+    var i = new NotesIterator(this);
     return i;
   }
 
@@ -66,6 +62,16 @@ class Keyboard{
       return (key.length==3);
     });
   }
+}
+
+class Keyboard extends Notes {
+  constructor(name) {
+    var keyboard = Keyboard.list.find(function(k){
+      return k.name == name;
+    });
+    super(keyboard.firstNote, keyboard.lastNote);
+    this.name = keyboard.name;
+  }
 
   middleC(){
     var cs = this.whites().filter((k) => {
@@ -76,26 +82,26 @@ class Keyboard{
   }
 
   leftSection(sec, n){
-    var slots = this.slots();
-    var last = slots.indexOf(sec[0]);
-    var section = slots.slice(last-n >= 0 ? last - n : 0, last);
+    var whites = this.whites();
+    var last = whites.indexOf(sec[0]);
+    var section = whites.slice(last-n >= 0 ? last - n : 0, last);
     return section;
   }
 
   rightSection(sec, n){
-    var slots = this.slots();
-    var last = slots.indexOf(sec[sec.length-1]);
-    var section = slots.slice(last + 1, last + n + 1);
+    var whites = this.whites();
+    var last = whites.indexOf(sec[sec.length-1]);
+    var section = whites.slice(last + 1, last + n + 1);
     return section;
   }
 
   sections(n){
-    var slots = this.slots();
-    var mc = slots.indexOf(this.middleC());
+    var whites = this.whites();
+    var mc = whites.indexOf(this.middleC());
     var i = Math.floor(n/2);
 
     var sections = [];
-    var mSection = slots.slice(mc-i>=0 ? mc-i : 0, mc+i);
+    var mSection = whites.slice(mc-i>=0 ? mc-i : 0, mc+i);
 
     var section = mSection;
     sections.push(section);
@@ -112,7 +118,11 @@ class Keyboard{
       if (section.length>0) sections.push(section);
     } while (section.length == n);
 
-    return sections;
+    var slotSections = sections.map((section) => {
+      var notes = new Notes(section[0], section[section.length-1]);
+      return notes.slots();
+    });
+    return slotSections;
   }
 }
 

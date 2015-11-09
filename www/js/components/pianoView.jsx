@@ -7,36 +7,35 @@ import Piano from './piano';
 class PianoView extends React.Component {
     constructor(props) {
        super(props);
-       this.state = {page: 1};
+       var total = this.props.data.length;
+       this.state = {pos: Math.floor(total/2)};
     }
 
     createSwiper(){
       var bottom = ReactDOM.findDOMNode(this);
       var swipe = bottom.getElementsByClassName("swipe")[0];
-      var total = this.props.data.length;
-      this.swipe = Swipe(swipe, {continuous: false, startSlide: Math.floor(total/2)});
+      if (swipe){
+        var total = this.props.data.length;
+        this.swipe = Swipe(swipe, {
+          continuous: false,
+          startSlide: this.state.pos,
+          callback: (index, elem) => {
+            this.setState({pos: index});
+          }
+        });
+      }
     }
 
     deleteSwiper(){
-      this.swipe.kill();
-      delete this.swipe;
+      if (this.swipe){
+        this.swipe.kill();
+        delete this.swipe;
+      }
     }
 
     componentDidMount() {
       console.log("mount");
       this.createSwiper();
-    }
-
-    componentWillUpdate(nextProps, nextState){
-      if (this.props.data.length!=nextProps.data.length){
-        this.deleteSwiper();
-      }
-    }
-
-    componentDidUpdate(prevProps, prevState){
-      if (this.props.data.length!=prevProps.data.length){
-        this.createSwiper();
-      }
     }
 
     componentWillUnmount() {
@@ -46,46 +45,54 @@ class PianoView extends React.Component {
 
     next(){
         this.swipe.next();
-        this.setState({page: this.swipe.getPos()});
     }
 
     prev(){
         this.swipe.prev();
-        this.setState({page: this.swipe.getPos()});
     }
 
     render () {
       console.log("rendor");
       var total = this.props.data.length;
-      var wLeft = Math.round(100*this.state.page/total) + "%";
+      var wLeft = Math.round(100*this.state.pos/total) + "%";
       var wMiddle = Math.round(100*1/total) + "%";
 
-      var slideViews = this.props.data.map((section, i)=>{
-         return(
-           <div key={i}>
-             <Piano data={section} />
-           </div>
-         );
-      });
-
-      return (
-        <div className="bottom-container">
-          <div className="indicator">
-            <div className="indicator-left" style={{width: wLeft}}></div>
-            <div className="indicator-middle" style={{width: wMiddle}}></div>
-            <div className="indicator-right"></div>
-          </div>
-          <div className="bottom">
-            <div className="prev glyphicon glyphicon-chevron-left" onClick={this.prev.bind(this)}></div>
-            <div id='slider' className='swipe'>
-              <div className='swipe-wrap'>
-                {slideViews}
-              </div>
+      if (this.props.data.length==1) {
+        return(
+          <div className="bottom-container">
+            <div className="bottom">
+               <Piano data={this.props.data[0]} />
             </div>
-            <div className="next glyphicon glyphicon-chevron-right" onClick={this.next.bind(this)}></div>
           </div>
-        </div>
-      )
+        )
+      }else{
+        var slideViews = this.props.data.map((section, i)=>{
+           return(
+             <div key={i}>
+               <Piano data={section} />
+             </div>
+           );
+        });
+
+        return (
+          <div className="bottom-container">
+            <div className="indicator">
+              <div className="indicator-left" style={{width: wLeft}}></div>
+              <div className="indicator-middle" style={{width: wMiddle}}></div>
+              <div className="indicator-right"></div>
+            </div>
+            <div className="bottom">
+              <div className="prev glyphicon glyphicon-chevron-left" onClick={this.prev.bind(this)}></div>
+              <div id='slider' className='swipe'>
+                <div className='swipe-wrap'>
+                  {slideViews}
+                </div>
+              </div>
+              <div className="next glyphicon glyphicon-chevron-right" onClick={this.next.bind(this)}></div>
+            </div>
+          </div>
+        )
+      }
     }
 }
 
