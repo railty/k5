@@ -37,7 +37,12 @@ class Game extends React.Component {
           height: window.innerHeight-50,
         };
 
-        return (
+        if (this.state.restarting) return (
+            <div>
+              reloading
+            </div>
+        )
+        else return (
             <div className="game" style={{ ...style }}>
               <Floor data={this.state.floor} />
               <PianoView data={this.state.piano} />

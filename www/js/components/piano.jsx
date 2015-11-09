@@ -17,10 +17,13 @@ class Piano extends React.Component {
           ));
         }
       }
+      var transform="translate(0, -200px)";
+      if (this.props.data[0].note.length==3) transform="translate(-20px, -200px)";
+
       return (
           <div className="piano">
             <div className="whites">{whites}</div>
-            <div className="blacks">{blacks}</div>
+            <div className="blacks" style={{ transform: transform }}>{blacks}</div>
           </div>
       )
     }

@@ -10,11 +10,38 @@ class PianoView extends React.Component {
        this.state = {page: 1};
     }
 
-    componentDidMount() {
+    createSwiper(){
       var bottom = ReactDOM.findDOMNode(this);
       var swipe = bottom.getElementsByClassName("swipe")[0];
       var total = this.props.data.length;
       this.swipe = Swipe(swipe, {continuous: false, startSlide: Math.floor(total/2)});
+    }
+
+    deleteSwiper(){
+      this.swipe.kill();
+      delete this.swipe;
+    }
+
+    componentDidMount() {
+      console.log("mount");
+      createSwiper();
+    }
+
+    componentWillUpdate(nextProps, nextState){
+      if (this.props.data.length!=nextProps.data.length){
+        deleteSwiper();
+      }
+    }
+
+    componentDidUpdate(prevProps, prevState){
+      if (this.props.data.length!=prevProps.data.length){
+        createSwiper();
+      }
+    }
+
+    componentWillUnmount() {
+      console.log("unmount");
+      deleteSwiper();
     }
 
     next(){
@@ -28,6 +55,7 @@ class PianoView extends React.Component {
     }
 
     render () {
+      console.log("rendor");
       var total = this.props.data.length;
       var wLeft = Math.round(100*this.state.page/total) + "%";
       var wMiddle = Math.round(100*1/total) + "%";

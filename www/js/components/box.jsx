@@ -37,7 +37,7 @@ class Box extends React.Component {
     }
     onClick(){
       var data = this.props.data;
-      var mp3 = data.note + data.octave + ".mp3";
+      var mp3 = data.note + ".mp3";
       playTone(mp3);
     }
 
