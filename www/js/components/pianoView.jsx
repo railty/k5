@@ -24,24 +24,24 @@ class PianoView extends React.Component {
 
     componentDidMount() {
       console.log("mount");
-      createSwiper();
+      this.createSwiper();
     }
 
     componentWillUpdate(nextProps, nextState){
       if (this.props.data.length!=nextProps.data.length){
-        deleteSwiper();
+        this.deleteSwiper();
       }
     }
 
     componentDidUpdate(prevProps, prevState){
       if (this.props.data.length!=prevProps.data.length){
-        createSwiper();
+        this.createSwiper();
       }
     }
 
     componentWillUnmount() {
       console.log("unmount");
-      deleteSwiper();
+      this.deleteSwiper();
     }
 
     next(){
