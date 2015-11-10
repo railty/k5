@@ -1,5 +1,6 @@
-import React, { PropTypes } from 'react'
-import Slot from './slot'
+import React, { PropTypes } from 'react';
+import UAParser from 'ua-parser-js';
+import Slot from './slot';
 
 class Piano extends React.Component {
     render () {
@@ -17,10 +18,16 @@ class Piano extends React.Component {
           ));
         }
       }
-      var transform="translate(0, -200px)";
-      if (this.props.data[0].note.length==3) transform="translate(-20px, -200px)";
 
-      if (cordova.platformId=="windows") transform="translate(0px, -30px)";
+      //200px is the white height
+      var transform="translate(0, -200px)";
+      var parser = new UAParser();
+      //render engine is different
+      //for webkit, a div with position absoulte inside a flex box shows ourside the flexbow, so need transform
+      //for edge, it shows inside the flexbox.
+      if (parser.getResult().engine.name=="EdgeHTML"){
+        transform="translate(0px, 0px)";
+      }
       return (
           <div className="piano">
             <div className="whites">{whites}</div>
@@ -30,4 +37,4 @@ class Piano extends React.Component {
     }
 }
 
-export default Piano
+export default Piano;

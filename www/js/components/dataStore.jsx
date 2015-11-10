@@ -6,7 +6,7 @@ import DataActions from './dataActions';
 
 class DataStore {
   constructor() {
-    this.restartGame("32 Keys");
+    this.restartGame("76 Keys");
     this.message = "Ready!";
 
     this.bindListeners({
@@ -37,7 +37,7 @@ class DataStore {
     var keyboard = new Keyboard(this.keyboardName);
     var id = 0;
     var height = window.innerHeight - 350;
-    var width = window.innerWidth - 50;
+    var width = window.innerWidth - 200;
     this.message = this.keyboardName + ":" + keyboard.keys().length + ":" + keyboard.whites().length*40;
 
     var keyWidth = 40;

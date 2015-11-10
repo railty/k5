@@ -36,7 +36,6 @@
   height: @white-height;
 
   display: flex;
-  justify-content: center;
   align-items: center;
   flex-direction: column;
 
@@ -55,7 +54,7 @@
     width: @white-width;
     height: 100%;
     border:solid 1px black;
-
+    margin: 0.0001px; //some wired problem in edge browser require this.
     display:flex;
     justify-content: center;
     align-items: flex-end;
@@ -70,7 +69,6 @@
     align-items: center;
 
     position: absolute;
-    transform: translate(0, -@white-height);
 }
 
 .black{
