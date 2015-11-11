@@ -62,6 +62,47 @@ class Notes{
       return (key.length==3);
     });
   }
+
+  whitesWithBlacks(){
+    var notes=[];
+    var note=null;
+    this.keys().forEach((key)=>{
+      if (!note) note = {};
+      if ((note.black)&&(note.white)){
+        notes.push(note);
+        note = {}
+      }
+      if (key.length==2){
+        if (note.white){
+          notes.push(note);
+          note = {white: key};
+        }
+        else{
+          if ((note.black)&&(note.black[0]!=key[0])){
+            notes.push(note);
+            note = {white: key};
+          }
+          else note.white = key;
+        }
+      }
+      else{
+        if (note.black){
+          notes.push(note);
+          note = {black: key};
+        }
+        else{
+          if ((note.white)&&(note.white[0]!=key[0])){
+            notes.push(note);
+            note = {black: key};
+          }
+          else note.black = key;
+        }
+      }
+    });
+    if (note) notes.push(note);
+    return notes;
+  }
+
 }
 
 class Keyboard extends Notes {

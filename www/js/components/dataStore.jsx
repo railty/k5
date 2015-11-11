@@ -6,7 +6,7 @@ import DataActions from './dataActions';
 
 class DataStore {
   constructor() {
-    this.restartGame("76 Keys");
+    this.restartGame("32 Keys");
     this.message = "Ready!";
 
     this.bindListeners({
@@ -49,6 +49,8 @@ class DataStore {
         return {note:key, box:null}
       });
     });
+
+    this.piano = keyboard.whitesWithBlacks();
 
     this.floor = [];
     keyboard.keys().forEach((key)=>{

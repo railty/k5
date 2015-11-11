@@ -23,8 +23,17 @@ class Slot extends React.Component {
   }
 
   render () {
-    const { connectDropTarget, canDrop, isOver, data: {note, box} } = this.props;
+    const { connectDropTarget, canDrop, isOver, data: {white, black, box} } = this.props;
     const isActive = canDrop && isOver;
+
+    var blackKey = black ? (<div className='black'></div>) : null;
+
+    return connectDropTarget(
+      <div className='white'>
+        {blackKey}
+        <span className='label'>{white}</span>
+      </div>
+    );
 
     var className = note.length==2 ? 'white' : 'black';
     let backgroundColor;
@@ -41,6 +50,8 @@ class Slot extends React.Component {
       opacity = 0;
     }
     var text = className=="white" ? note : '';
+
+
     if (box){
       return connectDropTarget(
         <div className={className} style={{ backgroundColor, opacity }}>
@@ -56,5 +67,6 @@ class Slot extends React.Component {
     }
   }
 }
+
 
 export default DropTarget("box", slotTarget, collect)(Slot);
