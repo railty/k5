@@ -41,16 +41,10 @@ class Game extends React.Component {
               Reloading
             </div>
         )
-        /*
+
         else return (
             <div className="game" style={{ ...style }}>
               <Floor data={this.state.floor} />
-              <PianoView data={this.state.piano} />
-              <CustomDragLayer />
-            </div>
-        )*/
-        else return (
-            <div className="game" style={{ ...style }}>
               <PianoView data={this.state.piano} />
               <CustomDragLayer />
             </div>

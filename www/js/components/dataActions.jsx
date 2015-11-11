@@ -8,6 +8,10 @@ class DataActions{
     this.dispatch(keyboardName);
   }
 
+  setIndicator(indicator){
+    this.dispatch(indicator);
+  }
+
   dropFloor(dt){
     this.dispatch(dt);
   }

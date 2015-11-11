@@ -6,7 +6,7 @@ import DataActions from './dataActions';
 
 class DataStore {
   constructor() {
-    this.restartGame("32 Keys");
+    this.restartGame("76 Keys");
     this.message = "Ready!";
 
     this.bindListeners({
@@ -16,6 +16,7 @@ class DataStore {
       dropSlot: DataActions.dropSlot,
       saveGame: DataActions.saveGame,
       loadGame: DataActions.loadGame,
+      setIndicator: DataActions.setIndicator,
     });
   }
 
@@ -150,6 +151,9 @@ class DataStore {
       this.piano = dt.piano;
       this.message = "Load success!";
     }.bind(this));
+  }
+  setIndicator(indicator){
+    this.indicator = indicator;
   }
 }
 
