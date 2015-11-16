@@ -6,7 +6,7 @@ import DataActions from './dataActions';
 
 class DataStore {
   constructor() {
-    this.restartGame("76 Keys");
+    this.restartGame("88 Keys");
     this.message = "Ready!";
 
     this.bindListeners({
@@ -18,6 +18,11 @@ class DataStore {
       loadGame: DataActions.loadGame,
       setIndicator: DataActions.setIndicator,
     });
+
+    this.exportPublicMethods({
+      bSuccess: this.bSuccess.bind(this)
+    });
+
   }
 
   restartGame(keyboardName){
@@ -26,7 +31,7 @@ class DataStore {
     setTimeout(function(){
       if (keyboardName) this.keyboardName = keyboardName;
       DataActions.restartGameFinished(keyboardName);
-    }.bind(this), 100);
+    }.bind(this), 50);
   }
 
   restartGameFinished(keyboardName){
@@ -40,7 +45,7 @@ class DataStore {
     var height = window.innerHeight - 350;
     var width = window.innerWidth - 200;
     this.message = this.keyboardName + ":" + keyboard.keys().length + ":" + keyboard.whites().length*40;
-
+console.log(this.message);
     var keyWidth = 40;
     var keysPerSection = Math.floor(width/keyWidth);
 
@@ -62,57 +67,57 @@ class DataStore {
   dropFloor(dt) {
     var box = dt.box;
     var dest = dt.dest;
-    /*
-    var iPiano = this.piano.findIndex(item => {
-      return (item.box) && (item.box.k == box.k);
-    });
-    */
-    debugger;
-    /*
-    this.piano.forEach((section)=>{
-      section.forEach((st)=>{
-        if ((st.box) && (st.box.note == box.note)) {
-          st.box = null;
-          this.floor.push(box);
-        }
-      });
-    });
-    */
-/*
-    if (iPiano != -1){
-      this.piano[iPiano].box = null;
-      this.floor.push(box);
-    }
-*/
 
+    //move the box from floor to floor
     var iFloor = this.floor.findIndex(b => {
       return b.note == box.note;
     });
     if (iFloor != -1){
-      console.log(iFloor);
       this.floor[iFloor].l = dest.x;
       this.floor[iFloor].t = dest.y;
     }
+
+    //move the box from piano to floor
+    var iPiano = this.piano.findIndex(b => {
+      return b.box && (b.box.note == box.note);
+    });
+    if (iPiano != -1){
+      this.piano[iPiano].box = null;
+      this.floor.push({note: box.note, l: dest.x, t: dest.y});
+    }
+
   }
 
   dropSlot(dt) {
     var box = dt.box;
     var slot = dt.slot;
-debugger;
-    this.piano.forEach((key)=>{
-      if (key.note == slot.note) {
-        key.box = box;
+    //drop to slot from another slot
+    //remove from another slot first
+    this.piano.forEach((st)=>{
+      if ((st.box) && (st.box.note == box.note)) {
+        st.box = null;
       }
     });
 
-    var idx = this.floor.findIndex((key)=>{
+    //drop to slot from floor
+    this.piano.forEach((st)=>{
+      if (st.note == slot.note) {
+        //this slot already has a box
+        //move the box back to floor, using original position
+        if (st.box) this.floor.push(st.box);
+        st.box = box;
+      }
+    });
+
+    var iFloor = this.floor.findIndex((key)=>{
       return key.note == box.note;
     });
-    this.floor.splice(idx, 1);
+    if (iFloor != -1)  this.floor.splice(iFloor, 1);
 
   }
 
   saveGame(){
+    debugger;
     writeFile('data.json', this).then(function(){
       this.message = "Save success!";
     }.bind(this));
@@ -126,6 +131,11 @@ debugger;
   }
   setIndicator(indicator){
     this.indicator = indicator;
+  }
+  bSuccess(){
+    return this.piano.every((k)=>{
+      return (k.box) && (k.note == k.box.note)
+    });
   }
 }
 

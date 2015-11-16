@@ -55,7 +55,6 @@ class PianoView extends React.Component {
     }
 
     render () {
-      console.log("rendor");
       return (
         <div className="bottom-container">
           <Indicator />
@@ -67,7 +66,7 @@ class PianoView extends React.Component {
             <div className="next glyphicon glyphicon-chevron-right" onClick={this.next.bind(this)}></div>
           </div>
         </div>
-      )
+      );
     }
 }
 

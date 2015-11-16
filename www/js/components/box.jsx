@@ -35,6 +35,7 @@ class Box extends React.Component {
         captureDraggingState: true
       });
     }
+
     onClick(){
       var data = this.props.data;
       var mp3 = data.note + ".mp3";
@@ -42,33 +43,37 @@ class Box extends React.Component {
     }
 
     render () {
-      const { isDragging, connectDragSource, data: {l, t, note, octave, color}, slot, preview } = this.props;
+      const { isDragging, connectDragSource, data: {l, t, note, octave, color}, slotNote, preview } = this.props;
       var style = {};
       const opacity = isDragging ? 0.5 : 1;
+      var cheat = 2;
 
       if (preview){
         return (
           <div className="box" style={{ ...style, opacity }} />
         );
       }else{
-        if (slot) {
-          style.width = "100%";
+        if (slotNote) {
+          if (slotNote == note) style.background = "lightgreen";
+          else style.background = "darkgreen";
           return (
             connectDragSource(
-              <div className="box" style={{ ...style, opacity }} onClick={this.onClick.bind(this)} >
-              </div>
+              <div className="box" style={{ ...style }} onClick={this.onClick.bind(this)} />
             )
           );
         }
         else{
-          style.position = 'absolute';
           style.left = l;
           style.top = t;
+
+          var contentDiv;
+          if (cheat > 0) contentDiv = (<div >{note}</div>);
+          else contentDiv = (<div className="glyphicon glyphicon-music"></div>);
 
           return (
             connectDragSource(
               <div className="box" style={{ ...style, opacity }} onClick={this.onClick.bind(this)} >
-                <div className="glyphicon glyphicon-music"></div>
+                {contentDiv}
               </div>
             )
           );

@@ -18,11 +18,11 @@ class Game extends React.Component {
     }
 
     componentDidMount() {
-      DataStore.listen(this.onChange.bind(this));
+      this.unlisten = DataStore.listen(this.onChange.bind(this));
     }
 
     componentWillUnmount() {
-      DataStore.unlisten(this.onChange);
+      this.unlisten();
     }
 
     onChange(state) {
@@ -30,18 +30,22 @@ class Game extends React.Component {
     }
 
     render () {
-        //var msg = bSuccess() ? 'Success' : 'Running';
+        var msg = DataStore.bSuccess() ? 'Success' : 'Running';
         const style = {
           //default bootstrap nav height is 50px
           height: window.innerHeight-50,
         };
 
-        if (this.state.restarting) return (
+        if (DataStore.bSuccess()) return (
+            <div className="text-screen">
+              Success!
+            </div>
+        )
+        else if (this.state.restarting) return (
             <div className="text-screen">
               Reloading
             </div>
         )
-
         else return (
             <div className="game" style={{ ...style }}>
               <Floor data={this.state.floor} />

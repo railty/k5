@@ -1,5 +1,5 @@
 @import "../../bower_components/bootstrap/less/bootstrap.less";
-@grid-float-breakpoint: @screen-xs-min;
+//@grid-float-breakpoint: 2*@screen-lg-min;
 
 @white-height: 200px;
 @white-width: 40px;
@@ -34,7 +34,7 @@
 
 .piano-view{
     overflow:hidden;
-    border:solid 1px red;
+    border:solid 0px red;
     flex-grow: 1;
     text-align: center;
 }
@@ -42,33 +42,20 @@
 .piano{
   width: 100%;
   height: @white-height;
-
   font-size:0px;
   white-space: nowrap;
   transition: transform 1s;
   transform: translate(0px, 0px);
 }
 
-.view{
-    overflow:hidden;
-    width:400px;
-    border:solid 1px red;
-}
-.piano{
-    font-size:0px;
-    width:800px;
-    transition: transform 2s;
-    transform: translate(0px, 0px);
-}
-
 .white{
+    box-sizing: content-box;
     width:40px;
     height:200px;
     border:solid 1px black;
     display:inline-block;
     background: lightgrey;
     text-align: center;
-    position: relative;
 }
 
 .black{
@@ -87,6 +74,7 @@
     bottom:0;
     height:40px;
     opacity: 0.75;
+    border: none;
 }
 
 .white > .note{
@@ -94,6 +82,7 @@
     color:black;
     position: absolute;
     bottom:0;
+    width:40px;
 }
 
 .black > .box{
@@ -103,7 +92,7 @@
 
 }
 
-.box{
+.floor > .box{
   width: @box-width;
   height: @box-height;
 
@@ -112,6 +101,7 @@
   color: black;
   cursor: move;
 
+  position: absolute;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -180,4 +170,6 @@ div.glyphicon-music {
 .text-screen{
   font-size: 4em;
   color: brown;
+  text-align: center;
+  clear: left;
 }

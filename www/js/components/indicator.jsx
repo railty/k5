@@ -8,11 +8,13 @@ class Indicator extends React.Component {
   }
 
   componentDidMount() {
-    DataStore.listen(this.onChange.bind(this));
+    this.unlisten = DataStore.listen(this.onChange.bind(this));
   }
 
+  //unlisten will remove the function from an array of functions using ===
+  //if you bind(this), it will lanuchn a new instance and it will never be same
   componentWillUnmount() {
-    DataStore.unlisten(this.onChange);
+    this.unlisten();
   }
 
   onChange(state) {
@@ -23,12 +25,12 @@ class Indicator extends React.Component {
     var viewLeft = 0, viewWidth = 1;
 
     if (this.state.indicator){
-      console.log("render indicator");
+      //console.log("render indicator");
       viewLeft = this.state.indicator.viewLeft;
       viewWidth = this.state.indicator.viewWidth;
     }
     else{
-      console.log("render default indicator");
+      //console.log("render default indicator");
     }
 
     var wLeft = Math.round(100*viewLeft) + "%";

@@ -1,3 +1,4 @@
+import "../../../bower_components/bootstrap/dist/js/bootstrap.min.js";
 import React from 'react';
 import { Button, Navbar, NavBrand, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
 import Keyboard from './keyboard';
@@ -12,21 +13,23 @@ export default class Top extends React.Component {
     }
 
     componentDidMount() {
+      /*
       DataStore.listen(this.onChange.bind(this));
       this.timer = setInterval(function(){
         var st = this.state;
         st.time++;
         this.setState(st);
       }.bind(this), 1000);
+      */
     }
 
     componentWillUnmount() {
-      clearInterval(this.timer);
-      DataStore.unlisten(this.onChange);
+      //clearInterval(this.timer);
+      //DataStore.unlisten(this.onChange);
     }
 
     onChange(state) {
-      this.setState(state);
+      //this.setState(state);
     }
 
     handleClick(menu, event) {
@@ -46,6 +49,7 @@ export default class Top extends React.Component {
     }
 
     render() {
+
       const menuItems = [];
       var i=0;
       for (var k of Keyboard.list){
@@ -58,8 +62,9 @@ export default class Top extends React.Component {
       return (
         <div className="top">
           <Navbar>
-            <NavBrand>K5</NavBrand>
-            <Nav>
+            <NavBrand>K5
+            </NavBrand>
+            <Nav id='navitems'>
               <NavItem onClick={this.handleClick.bind(this, 'restart')}>Restart</NavItem>
               <NavItem onClick={this.handleClick.bind(this, 'save')}>Save</NavItem>
               <NavItem onClick={this.handleClick.bind(this, 'load')}>Load</NavItem>
@@ -72,5 +77,6 @@ export default class Top extends React.Component {
           </Navbar>
         </div>
       );
+
     }
 }

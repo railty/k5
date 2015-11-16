@@ -16,6 +16,8 @@ class NotesIterator{
       n = String.fromCharCode(n.charCodeAt(0) + 1);
       if (n == 'H') {
         n = 'A';
+      }
+      if (n == 'C') {
         o = String.fromCharCode(o.charCodeAt(0) + 1);
       }
       this.note = n + 'b' + o;

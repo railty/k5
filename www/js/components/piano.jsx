@@ -1,5 +1,4 @@
 import React, { PropTypes } from 'react';
-import UAParser from 'ua-parser-js';
 import Slot from './slot';
 
 class Piano extends React.Component {

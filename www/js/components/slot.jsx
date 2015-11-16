@@ -30,8 +30,8 @@ class Slot extends React.Component {
     if (isActive) style.backgroundColor = 'lightgreen';
 
     var className = note.length==2 ? 'white' : 'black';
-    var labelDiv = className == 'white' ? (<span className='note'>{note}</span>) : null;
-    var boxDiv = box ? (<Box data={box} slot />) : null;
+    var labelDiv = className == 'white' ? (<div className='note'>{note}</div>) : null;
+    var boxDiv = box ? (<Box data={box} slotNote={note} />) : null;
 
     return connectDropTarget(
       <div className={className} style={style}>
