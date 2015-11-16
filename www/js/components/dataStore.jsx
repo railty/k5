@@ -44,14 +44,9 @@ class DataStore {
     var keyWidth = 40;
     var keysPerSection = Math.floor(width/keyWidth);
 
-    var sections = keyboard.sections(keysPerSection);
-    this.piano = sections.map((section)=>{
-      return section.map((key)=>{
-        return {note:key, box:null}
-      });
+    this.piano = keyboard.keys().map((key)=>{
+      return {note:key, box:null};
     });
-
-    this.piano = keyboard.whitesWithBlacks();
 
     this.floor = [];
     keyboard.keys().forEach((key)=>{
@@ -59,7 +54,6 @@ class DataStore {
         note: key,
         l: Math.round(Math.random()*width),
         t: Math.round(Math.random()*height),
-        box: null,
       });
     });
     //this.message = "Game restarted!";
@@ -73,6 +67,8 @@ class DataStore {
       return (item.box) && (item.box.k == box.k);
     });
     */
+    debugger;
+    /*
     this.piano.forEach((section)=>{
       section.forEach((st)=>{
         if ((st.box) && (st.box.note == box.note)) {
@@ -81,6 +77,7 @@ class DataStore {
         }
       });
     });
+    */
 /*
     if (iPiano != -1){
       this.piano[iPiano].box = null;
@@ -101,43 +98,18 @@ class DataStore {
   dropSlot(dt) {
     var box = dt.box;
     var slot = dt.slot;
-    var iFloor = this.floor.findIndex(b => {
-      return b.note == box.note;
-    });
-
-    if (iFloor != -1) this.floor.splice(iFloor, 1);
-    this.piano.forEach((section)=>{
-      section.forEach((st)=>{
-        if ((st.box) && (st.box.note == box.note)) st.box = null;
-      });
-    });
-
-    this.piano.forEach((section)=>{
-      section.forEach((st)=>{
-        if (st.note == slot.note)
-        {
-          if (st.box) this.floor.push(st.box);
-          st.box = box;
-        }
-      });
-    });
-    /*
-    var iBox = this.piano.findIndex(item => {
-      return item.box && (item.box.k == box.k);
-    });
-    if (iBox != -1){
-      this.piano[iBox].box = null;
-    }
-    var iSlot = this.piano.findIndex(item => {
-      return item.k == slot.k;
-    });
-    if (iSlot != -1){
-      if (this.piano[iSlot].box){
-        this.floor.push(this.piano[iSlot].box);
+debugger;
+    this.piano.forEach((key)=>{
+      if (key.note == slot.note) {
+        key.box = box;
       }
-      this.piano[iSlot].box = box;
-    }
-    */
+    });
+
+    var idx = this.floor.findIndex((key)=>{
+      return key.note == box.note;
+    });
+    this.floor.splice(idx, 1);
+
   }
 
   saveGame(){

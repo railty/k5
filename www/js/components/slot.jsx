@@ -23,48 +23,22 @@ class Slot extends React.Component {
   }
 
   render () {
-    const { connectDropTarget, canDrop, isOver, data: {white, black, box} } = this.props;
+    const { connectDropTarget, canDrop, isOver, data: {note, box} } = this.props;
     const isActive = canDrop && isOver;
 
-    var blackKey = black ? (<div className='black'></div>) : null;
-
-    return connectDropTarget(
-      <div className='white'>
-        {blackKey}
-        <span className='label'>{white}</span>
-      </div>
-    );
+    var style = {};
+    if (isActive) style.backgroundColor = 'lightgreen';
 
     var className = note.length==2 ? 'white' : 'black';
-    let backgroundColor;
-    if (isActive) {
-      backgroundColor = 'lightgreen';
-    }
-    else{
-      backgroundColor = className=='white' ? 'lightgrey' : 'black';
-    }
-    let disable = (note.substr(0,2)=='Fb')||(note.substr(0,2)=='Cb');
-    let opacity = 1;
-    if (disable) {
-      backgroundColor = 'lightgrey';
-      opacity = 0;
-    }
-    var text = className=="white" ? note : '';
+    var labelDiv = className == 'white' ? (<span className='note'>{note}</span>) : null;
+    var boxDiv = box ? (<Box data={box} slot />) : null;
 
-
-    if (box){
-      return connectDropTarget(
-        <div className={className} style={{ backgroundColor, opacity }}>
-          <Box data={box} slot={className} />
-        </div>
-      );
-    }else{
-      return connectDropTarget(
-        <div className={className} style={{ backgroundColor, opacity }}>
-          {text}
-        </div>
-      );
-    }
+    return connectDropTarget(
+      <div className={className} style={style}>
+        {labelDiv}
+        {boxDiv}
+      </div>
+    );
   }
 }
 

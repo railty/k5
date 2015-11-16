@@ -43,10 +43,7 @@ class Box extends React.Component {
 
     render () {
       const { isDragging, connectDragSource, data: {l, t, note, octave, color}, slot, preview } = this.props;
-      const style = {
-        left: l,
-        top: t,
-      };
+      var style = {};
       const opacity = isDragging ? 0.5 : 1;
 
       if (preview){
@@ -65,6 +62,9 @@ class Box extends React.Component {
         }
         else{
           style.position = 'absolute';
+          style.left = l;
+          style.top = t;
+
           return (
             connectDragSource(
               <div className="box" style={{ ...style, opacity }} onClick={this.onClick.bind(this)} >

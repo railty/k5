@@ -11,7 +11,6 @@ class Piano extends React.Component {
           <Slot key={++i} data={key}/>
         )
       });
-
       return (
         <div className='piano'>
           {slots}
