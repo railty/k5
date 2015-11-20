@@ -1,11 +1,14 @@
 import '../less/index.less';
+import "../../bower_components/bootstrap/dist/js/bootstrap.min.js";
 
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+import DataStore from './components/dataStore';
+import DataActions from './components/dataActions';
 import Game from './components/game';
-import Graph from './components/graph';
-import Top from './components/top';
+import Hamburger from './components/hamburger';
+import Alert from './components/alert';
 
 Promise.onPossiblyUnhandledRejection(err => {
     throw err
@@ -24,13 +27,33 @@ window.onerror = (msg, url, line, column, e) => {
 class App extends React.Component {
   constructor(props) {
      super(props);
+     this.state = DataStore.getState();
+  }
+
+  componentDidMount() {
+    DataStore.listen(this.onChange.bind(this));
+    this.timer = setInterval(function(){
+      DataActions.tick();
+    }.bind(this), 1000000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timer);
+    DataStore.unlisten(this.onChange);
+  }
+
+  onChange(state) {
+    this.setState(state);
+    console.log("change: " + this.state.message);
   }
 
   render() {
+    console.log("render index");
     return (
       <div>
-        <Top />
         <Game />
+        <Hamburger />
+        <Alert message={this.state.message}/>
       </div>
     );
   }

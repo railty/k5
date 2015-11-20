@@ -33,7 +33,7 @@ class Game extends React.Component {
         var msg = DataStore.bSuccess() ? 'Success' : 'Running';
         const style = {
           //default bootstrap nav height is 50px
-          height: window.innerHeight-50,
+          height: window.innerHeight,
         };
 
         if (DataStore.bSuccess()) return (

@@ -17,6 +17,8 @@ class DataStore {
       saveGame: DataActions.saveGame,
       loadGame: DataActions.loadGame,
       setIndicator: DataActions.setIndicator,
+      setMessage: DataActions.setMessage,
+      tick: DataActions.tick,
     });
 
     this.exportPublicMethods({
@@ -44,8 +46,9 @@ class DataStore {
     var id = 0;
     var height = window.innerHeight - 350;
     var width = window.innerWidth - 200;
+
     this.message = this.keyboardName + ":" + keyboard.keys().length + ":" + keyboard.whites().length*40;
-console.log(this.message);
+
     var keyWidth = 40;
     var keysPerSection = Math.floor(width/keyWidth);
 
@@ -58,10 +61,10 @@ console.log(this.message);
       this.floor.push({
         note: key,
         l: Math.round(Math.random()*width),
-        t: Math.round(Math.random()*height),
+        t: Math.round(Math.random()*height + 50),
       });
     });
-    //this.message = "Game restarted!";
+    this.message = "Game " + this.keyboardName + " restarted!";
   }
 
   dropFloor(dt) {
@@ -85,7 +88,6 @@ console.log(this.message);
       this.piano[iPiano].box = null;
       this.floor.push({note: box.note, l: dest.x, t: dest.y});
     }
-
   }
 
   dropSlot(dt) {
@@ -117,11 +119,11 @@ console.log(this.message);
   }
 
   saveGame(){
-    debugger;
     writeFile('data.json', this).then(function(){
       this.message = "Save success!";
     }.bind(this));
   }
+
   loadGame(){
     readFile('data.json').then(function(dt){
       this.floor = dt.floor;
@@ -129,10 +131,22 @@ console.log(this.message);
       this.message = "Load success!";
     }.bind(this));
   }
+
   setIndicator(indicator){
     this.indicator = indicator;
   }
+
+  setMessage(msg){
+    this.message = msg;
+  }
+
+  tick(){
+    if (this.seconds) this.seconds++;
+    else this.seconds = 0;
+  }
+
   bSuccess(){
+    return false;
     return this.piano.every((k)=>{
       return (k.box) && (k.note == k.box.note)
     });
