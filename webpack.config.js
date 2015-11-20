@@ -22,18 +22,13 @@ module.exports = {
   },
   resolve: {
     extensions: ['', '.json', '.node', '.js', '.jsx'],
-    alias: {
-        jquery: __dirname + "/bower_components/jquery/dist/jquery.js",
-    },
+    alias: {},
     modulesDirectories: ['node_modules', "www/js"]
   },
   plugins: [
       new webpack.ProvidePlugin({Promise: 'bluebird'}),
       new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor/index.js', ['index']),
-      new webpack.ProvidePlugin({
-        $: "jquery",
-        jQuery: "jquery"
-      }),
+      new webpack.ProvidePlugin({}),
   ],
   module: {
     loaders: [{

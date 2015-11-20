@@ -1,9 +1,53 @@
 import React from 'react';
-import Keyboard from './keyboard';
-import DataStore from './dataStore';
 import DataActions from './dataActions';
+import { MenuItem, Dropdown, Glyphicon } from 'react-bootstrap';
 
 export default class Hamburger extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  onSelect(e, eventKey){
+    switch(eventKey) {
+      case 'restart':
+        DataActions.restartGame();
+        break;
+      case 'load':
+        DataActions.loadGame();
+        break;
+      case 'save':
+        DataActions.saveGame();
+        break;
+      case 'options':
+        DataActions.openOptionDialog();
+        break;
+      default:
+    }
+  }
+
+  render(){
+    return (
+      <Dropdown id="humburger"  style={{position:'absolute', top: 20, left: 20}}>
+        <Dropdown.Toggle bsStyle="danger">
+          <Glyphicon glyph="menu-hamburger" />
+        </Dropdown.Toggle>
+        <Dropdown.Menu>
+          <MenuItem eventKey="restart" onSelect={this.onSelect.bind(this)}>Restart</MenuItem>
+          <MenuItem eventKey="save" onSelect={this.onSelect.bind(this)}>Save</MenuItem>
+          <MenuItem eventKey="load" onSelect={this.onSelect.bind(this)}>Load</MenuItem>
+          <MenuItem divider />
+          <MenuItem eventKey="options" onSelect={this.onSelect.bind(this)}>Options...</MenuItem>
+
+        </Dropdown.Menu>
+      </Dropdown>
+    );
+  }
+}
+
+/*
+//this is the version of multiple level menu, direct using jquery and bootstrap
+export default class Hamburger extends React.Component {
+
     componentDidMount() {
       $(".dropdown-menu > li > a.trigger").on("click",function(e){
         var current=$(this).next();
@@ -32,7 +76,7 @@ export default class Hamburger extends React.Component {
     }
 
     render() {
-      /*
+
       const menuItems = [];
       var i=0;
       for (var k of Keyboard.list){
@@ -41,7 +85,7 @@ export default class Hamburger extends React.Component {
           <MenuItem key={i} onClick={this.handleClick.bind(this, k.name)}>{k.name}</MenuItem>
         );
       }
-      */
+
       return (
       <div className="dropdown top">
         <a href="#" className="btn dropdown-toggle" data-toggle="dropdown">
@@ -64,3 +108,4 @@ export default class Hamburger extends React.Component {
       );
     }
 }
+*/

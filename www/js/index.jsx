@@ -1,5 +1,4 @@
 import '../less/index.less';
-import "../../bower_components/bootstrap/dist/js/bootstrap.min.js";
 
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -8,7 +7,8 @@ import DataStore from './components/dataStore';
 import DataActions from './components/dataActions';
 import Game from './components/game';
 import Hamburger from './components/hamburger';
-import Alert from './components/alert';
+import OptionDialog from './components/optionDialog';
+import Message from './components/message';
 
 Promise.onPossiblyUnhandledRejection(err => {
     throw err
@@ -49,11 +49,13 @@ class App extends React.Component {
 
   render() {
     console.log("render index");
+
     return (
       <div>
-        <Game />
+        <Game floor={this.state.floor} piano={this.state.piano}/>
         <Hamburger />
-        <Alert message={this.state.message}/>
+        <OptionDialog options={this.state.options} />
+        <Message message={this.state.message} />
       </div>
     );
   }

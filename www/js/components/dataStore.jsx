@@ -8,16 +8,21 @@ class DataStore {
   constructor() {
     this.restartGame("88 Keys");
     this.message = "Ready!";
+    this.options={
+      bShow: false,
+      bShowNoteInFloorBox: false,
+      bPianoBoxColorHint: false,
+    };
 
     this.bindListeners({
       restartGame: DataActions.restartGame,
-      restartGameFinished: DataActions.restartGameFinished,
       dropFloor: DataActions.dropFloor,
       dropSlot: DataActions.dropSlot,
       saveGame: DataActions.saveGame,
       loadGame: DataActions.loadGame,
       setIndicator: DataActions.setIndicator,
       setMessage: DataActions.setMessage,
+      openOptionDialog: DataActions.openOptionDialog,
       tick: DataActions.tick,
     });
 
@@ -29,17 +34,6 @@ class DataStore {
 
   restartGame(keyboardName){
     console.log("restart game");
-    this.restarting = true;
-    setTimeout(function(){
-      if (keyboardName) this.keyboardName = keyboardName;
-      DataActions.restartGameFinished(keyboardName);
-    }.bind(this), 50);
-  }
-
-  restartGameFinished(keyboardName){
-    console.log("restart game finished");
-    this.restarting = false;
-
     if (keyboardName) this.keyboardName = keyboardName;
 
     var keyboard = new Keyboard(this.keyboardName);
@@ -120,7 +114,7 @@ class DataStore {
 
   saveGame(){
     writeFile('data.json', this).then(function(){
-      this.message = "Save success!";
+      DataActions.setMessage("Save success!");
     }.bind(this));
   }
 
@@ -128,7 +122,8 @@ class DataStore {
     readFile('data.json').then(function(dt){
       this.floor = dt.floor;
       this.piano = dt.piano;
-      this.message = "Load success!";
+      //this is basicly force a refresh
+      DataActions.setMessage("Load success!");
     }.bind(this));
   }
 
@@ -138,6 +133,18 @@ class DataStore {
 
   setMessage(msg){
     this.message = msg;
+  }
+
+  openOptionDialog(options){
+    if (options){
+      //close and save
+      debugger;
+      this.options = options;
+    }else{
+      //open
+      this.options.bShow = true;
+    }
+
   }
 
   tick(){

@@ -1,5 +1,5 @@
 @import "../../bower_components/bootstrap/less/bootstrap.less";
-//@grid-float-breakpoint: 2*@screen-lg-min;
+@grid-float-breakpoint: 2*@screen-lg-min;
 
 @white-height: 200px;
 @white-width: 40px;
@@ -9,17 +9,14 @@
 @box-height: 40px;
 @box-width: 40px;
 
-.top{
-  position:absolute;
-  top: 20px;
-  left: 20px;
-}
-
 #message{
   position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;
+  .alert{
+    margin: 0;
+  }
 }
 
 .game{
@@ -37,6 +34,21 @@
   width: 100%;
 
   background: burlywood;
+
+  .box{
+    width: @box-width;
+    height: @box-height;
+
+    border: solid 1px black;
+    background: lightgreen;
+    color: black;
+    cursor: move;
+
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }
 
 .piano-view{
@@ -63,6 +75,22 @@
     display:inline-block;
     background: lightgrey;
     text-align: center;
+    .box{
+        background:lightgreen;
+        width:40px;
+        position: absolute;
+        bottom:0;
+        height:40px;
+        opacity: 0.75;
+        border: none;
+    }
+    .note{
+        font-size:14px;
+        color:black;
+        position: absolute;
+        bottom:0;
+        width:40px;
+    }
 }
 
 .black{
@@ -72,47 +100,13 @@
     display:inline-block;
     position: absolute;
     transform: translate(-10px, 0px);
+    .box{
+        background:lightgreen;
+        width:100%;
+        height:20px;
+    }
 }
 
-.white > .box{
-    background:lightgreen;
-    width:40px;
-    position: absolute;
-    bottom:0;
-    height:40px;
-    opacity: 0.75;
-    border: none;
-}
-
-.white > .note{
-    font-size:14px;
-    color:black;
-    position: absolute;
-    bottom:0;
-    width:40px;
-}
-
-.black > .box{
-    background:lightgreen;
-    width:100%;
-    height:20px;
-
-}
-
-.floor > .box{
-  width: @box-width;
-  height: @box-height;
-
-  border: solid 1px black;
-  background: lightgreen;
-  color: black;
-  cursor: move;
-
-  position: absolute;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
 
 div.glyphicon-music {
     font-size: 1.5em;
@@ -180,13 +174,13 @@ div.glyphicon-music {
   text-align: center;
   clear: left;
 }
-
+/*
 .dropdown-menu>li
 {	position:relative;
-	-webkit-user-select: none; /* Chrome/Safari */
-	-moz-user-select: none; /* Firefox */
-	-ms-user-select: none; /* IE10+ */
-	/* Rules below not implemented in browsers yet */
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+
 	-o-user-select: none;
 	user-select: none;
 	cursor:pointer;
@@ -226,6 +220,7 @@ div.glyphicon-music {
     width: 0;
 	margin-left:5px;
 }
+*/
 .main{
     width:100%;
     height:400px;

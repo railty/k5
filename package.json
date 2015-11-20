@@ -36,6 +36,7 @@
     "debug": "^2.2.0",
     "history": "^1.12.5",
     "react": "^0.14.0",
+    "react-bootstrap": "^0.28.1",
     "react-dnd": "^2.0.2",
     "react-dnd-html5-backend": "^2.0.0",
     "react-dnd-touch-backend": "^0.2.0"
