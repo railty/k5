@@ -39,6 +39,12 @@ export default class Swipe {
         else if (Math.abs(this.distY) >= this.threshold && Math.abs(this.distX) <= this.restraint){ // 2nd condition for vertical swipe met
             this.swipedir = (this.distY < 0)? 'up' : 'down'; // if dist traveled is negative, it indicates up swipe
         }
+        else{
+          console.log("too short?");    
+        }
+    }
+    else{
+      console.log("too slow?");
     }
     console.log("touch end: " + this.swipedir);
     this.handleSwipe(this.swipedir);

@@ -12,7 +12,7 @@ class DataStore {
       bShow: false,
       bShowNoteInFloorBox: false,
       bPianoBoxColorHint: false,
-      keyboardName: '88 Keys'
+      keyboardName: '32 Keys'
     };
 
     this.bindListeners({
