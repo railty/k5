@@ -12,12 +12,6 @@ export default class BoxDragPreview extends Component {
     super(props);
   }
 
-  componentDidMount() {
-  }
-
-  componentWillUnmount() {
-  }
-
   render() {
     const { data } = this.props;
     return (

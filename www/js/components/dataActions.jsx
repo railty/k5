@@ -9,10 +9,6 @@ class DataActions{
     this.dispatch(indicator);
   }
 
-  tick(){
-    this.dispatch();
-  }
-
   restartGame(keyboardName){
     this.dispatch(keyboardName);
   }
@@ -30,6 +26,10 @@ class DataActions{
   }
 
   loadGame(){
+    this.dispatch();
+  }
+
+  tick(){
     this.dispatch();
   }
 

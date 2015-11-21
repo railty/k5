@@ -5,6 +5,7 @@ import Swipe from './swipe';
 import Piano from './piano';
 import Indicator from './indicator';
 import DataActions from './dataActions';
+import DataStore from './dataStore';
 
 
 class PianoView extends React.Component {
@@ -12,23 +13,43 @@ class PianoView extends React.Component {
        super(props);
     }
 
-    componentDidMount() {
-      console.log("mount");
+    calculateIndicator() {
       this.viewLeft = 0;
       var bottom = ReactDOM.findDOMNode(this);
       var pianoView = bottom.getElementsByClassName("piano-view")[0];
       var piano = bottom.getElementsByClassName("piano")[0];
+      if (this.swipe) this.swipe.delete();
       this.swipe = new Swipe(pianoView, (swipeDir)=>{
         if (swipeDir=="left") this.next();
         if (swipeDir=="right") this.prev();
       });
+
+      return {viewLeft: this.viewLeft/piano.scrollWidth, viewWidth: pianoView.clientWidth/piano.scrollWidth};
+    }
+
+    componentDidMount() {
+      var nextIndicator = this.calculateIndicator();
       setTimeout(()=>{
-        DataActions.setIndicator({viewLeft: this.viewLeft/piano.scrollWidth, viewWidth: pianoView.clientWidth/piano.scrollWidth});
+        DataActions.setIndicator(nextIndicator);
       }, 0);
     }
 
+    componentDidUpdate(prevProps, prevState){
+      //keyboard changed
+      if (prevProps.data.length != this.props.data.length){
+        var nextIndicator = this.calculateIndicator();
+        this.slide();
+        console.log(nextIndicator);
+        var lastIndicator = DataStore.getIndicator();
+        if ((lastIndicator.viewLeft != nextIndicator.viewLeft) || (lastIndicator.viewWidth != nextIndicator.viewWidth)){
+          setTimeout(()=>{
+            DataActions.setIndicator(nextIndicator);
+          }, 0);
+        }
+      }
+    }
+
     componentWillUnmount() {
-      console.log("unmount");
       this.swipe.delete();
     }
 

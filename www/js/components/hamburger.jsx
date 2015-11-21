@@ -28,7 +28,7 @@ export default class Hamburger extends React.Component {
   render(){
     return (
       <Dropdown id="humburger"  style={{position:'absolute', top: 20, left: 20}}>
-        <Dropdown.Toggle bsStyle="danger">
+        <Dropdown.Toggle bsStyle="danger" noCaret> 
           <Glyphicon glyph="menu-hamburger" />
         </Dropdown.Toggle>
         <Dropdown.Menu>
@@ -37,7 +37,6 @@ export default class Hamburger extends React.Component {
           <MenuItem eventKey="load" onSelect={this.onSelect.bind(this)}>Load</MenuItem>
           <MenuItem divider />
           <MenuItem eventKey="options" onSelect={this.onSelect.bind(this)}>Options...</MenuItem>
-
         </Dropdown.Menu>
       </Dropdown>
     );

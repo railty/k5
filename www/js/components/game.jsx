@@ -23,6 +23,7 @@ class Game extends React.Component {
         if (DataStore.bSuccess()) return (
             <div className="text-screen">
               Success!
+              Good Job!
             </div>
         )
         else return (

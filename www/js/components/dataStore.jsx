@@ -6,12 +6,13 @@ import DataActions from './dataActions';
 
 class DataStore {
   constructor() {
-    this.restartGame("88 Keys");
+    this.seconds = 0;
     this.message = "Ready!";
     this.options={
       bShow: false,
       bShowNoteInFloorBox: false,
       bPianoBoxColorHint: false,
+      keyboardName: '88 Keys'
     };
 
     this.bindListeners({
@@ -27,21 +28,23 @@ class DataStore {
     });
 
     this.exportPublicMethods({
-      bSuccess: this.bSuccess.bind(this)
+      bSuccess: this.bSuccess.bind(this),
+      getOptions: this.getOptions.bind(this),
+      getIndicator: this.getIndicator.bind(this),
     });
 
+    this.restartGame();
   }
 
   restartGame(keyboardName){
-    console.log("restart game");
-    if (keyboardName) this.keyboardName = keyboardName;
+    if (keyboardName) this.options.keyboardName = keyboardName;
 
-    var keyboard = new Keyboard(this.keyboardName);
+    var keyboard = new Keyboard(this.options.keyboardName);
     var id = 0;
     var height = window.innerHeight - 350;
     var width = window.innerWidth - 200;
 
-    this.message = this.keyboardName + ":" + keyboard.keys().length + ":" + keyboard.whites().length*40;
+    this.message = this.options.keyboardName + ":" + keyboard.keys().length + ":" + keyboard.whites().length*40;
 
     var keyWidth = 40;
     var keysPerSection = Math.floor(width/keyWidth);
@@ -58,7 +61,7 @@ class DataStore {
         t: Math.round(Math.random()*height + 50),
       });
     });
-    this.message = "Game " + this.keyboardName + " restarted!";
+    this.message = "Game " + this.options.keyboardName + " restarted!";
   }
 
   dropFloor(dt) {
@@ -131,6 +134,10 @@ class DataStore {
     this.indicator = indicator;
   }
 
+  getIndicator(){
+    return this.indicator ? this.indicator : {viewLeft: 0, viewWidth: 1};
+  }
+
   setMessage(msg){
     this.message = msg;
   }
@@ -138,7 +145,6 @@ class DataStore {
   openOptionDialog(options){
     if (options){
       //close and save
-      debugger;
       this.options = options;
     }else{
       //open
@@ -148,15 +154,21 @@ class DataStore {
   }
 
   tick(){
-    if (this.seconds) this.seconds++;
-    else this.seconds = 0;
+    this.seconds++;
   }
 
   bSuccess(){
-    return false;
     return this.piano.every((k)=>{
       return (k.box) && (k.note == k.box.note)
     });
+  }
+
+  getOptions(){
+    return this.options;
+  }
+
+  getSeconds(){
+    return this.seconds;
   }
 }
 

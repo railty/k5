@@ -3,6 +3,7 @@ import { DragSource } from 'react-dnd';
 import { getEmptyImage } from 'react-dnd-html5-backend';
 import { playTone } from './mp3';
 import DataActions from './dataActions';
+import DataStore from './dataStore';
 
 const boxSource = {
   beginDrag(props) {
@@ -46,16 +47,20 @@ class Box extends React.Component {
       const { isDragging, connectDragSource, data: {l, t, note, octave, color}, slotNote, preview } = this.props;
       var style = {};
       const opacity = isDragging ? 0.5 : 1;
-      var cheat = 2;
+      const options = DataStore.getOptions();
 
       if (preview){
+        style.left = l;
+        style.top = t;
         return (
           <div className="box" style={{ ...style, opacity }} />
         );
       }else{
+        //box is in piano
         if (slotNote) {
-          if (slotNote == note) style.background = "lightgreen";
-          else style.background = "darkgreen";
+          style.background = "lightgreen";
+          if ((options.bPianoBoxColorHint) && (slotNote == note)) style.background = "darkgreen";
+
           return (
             connectDragSource(
               <div className="box" style={{ ...style }} onClick={this.onClick.bind(this)} />
@@ -63,11 +68,12 @@ class Box extends React.Component {
           );
         }
         else{
+          //box is in floor
           style.left = l;
           style.top = t;
 
           var contentDiv;
-          if (cheat > 0) contentDiv = (<div >{note}</div>);
+          if (options.bShowNoteInFloorBox) contentDiv = (<div >{note}</div>);
           else contentDiv = (<div className="glyphicon glyphicon-music"></div>);
 
           return (
