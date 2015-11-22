@@ -124,3 +124,7 @@ gulp.task('plugin', shell.task([
   'cordova plugin remove cordova-plugin-file',
   'cordova plugin add https://github.com/apache/cordova-plugin-file.git'
 ]));
+
+gulp.task('icon', shell.task([
+  'cordova-icon'
+]));
