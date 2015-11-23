@@ -7,3 +7,5 @@ platforms
 
 plugins/*
 !plugins/fetch.json
+
+.DS_Store
